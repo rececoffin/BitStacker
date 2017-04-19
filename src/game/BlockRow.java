@@ -5,6 +5,10 @@ public class BlockRow {
 	
 	public BlockRow(int numBits) {
 		bitString = new Block[numBits];
+		
+		for(int i = 0; i < numBits; i++){
+			bitString[i] = new Block();
+		}
 	}
 
 	public Block[] getBitString() {
@@ -18,6 +22,16 @@ public class BlockRow {
 	public void setString(Block[] bitString) {
 		this.bitString = bitString;
 		
+	}
+
+	public void setValue(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean checkGuess(int i) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	

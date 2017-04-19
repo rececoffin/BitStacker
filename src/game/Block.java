@@ -2,6 +2,9 @@ package game;
 
 public class Block {
 	private int bit;
+	public Block() {
+		bit = -1;
+	}
 
 	public void generateRandomBit() {
 		// TODO Auto-generated method stub
