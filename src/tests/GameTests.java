@@ -4,21 +4,13 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import game.Block;
 import game.BlockRow;
 import game.GamePlay;
-import sun.misc.Queue;
 
 public class GameTests {
-//	private Block block;
-//	@Before
-//	public void setUp(){
-//		block = new Block();
-//		
-//	}
 	
 	//test that the 3 bit strings are generating a random 1 or 0
 	@Test
@@ -147,12 +139,6 @@ public class GameTests {
 		//game should end when the size is 8
 		gp.setList(blocks);
 		assertTrue(gp.gameOver());
-	}
-	
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
 	}
 
 }
