@@ -2,13 +2,18 @@ package game;
 
 public class BlockRow {
 	private Block[] bitString;
+	private int bitValue;
+	private int numBits;
 	
 	public BlockRow(int numBits) {
-		bitString = new Block[numBits];
+		this.numBits = numBits;
+		bitString = new Block[this.numBits];
 		
 		for(int i = 0; i < numBits; i++){
 			bitString[i] = new Block();
 		}
+		
+		bitValue = 0;
 	}
 
 	public Block[] getBitString() {
@@ -16,7 +21,12 @@ public class BlockRow {
 	}
 
 	public int calcValue() {
-		return 0;
+		int value = 0;
+		for(int i = 0; i < bitString.length; i++){
+			value += (bitString[i].getBit()) * (Math.pow(2, numBits - i - 1));
+		}
+		
+		return value;
 	}
 
 	public void setString(Block[] bitString) {
@@ -24,9 +34,8 @@ public class BlockRow {
 		
 	}
 
-	public void setValue(int i) {
-		// TODO Auto-generated method stub
-		
+	public void setValue(int bitValue) {
+		this.bitValue = bitValue;
 	}
 
 	public boolean checkGuess(int i) {
