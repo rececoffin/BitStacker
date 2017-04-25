@@ -1,9 +1,13 @@
 package game;
 
+import java.awt.Graphics;
 import java.util.Random;
 
 public class Block {
 	private int bit;
+	public static final int width = 30;
+	public static final int height = 30;
+	public static final int spacing = 2;
 	public Block() {
 		bit = 0;
 	}
@@ -25,4 +29,8 @@ public class Block {
 		this.bit = b;
 	}
 
+	public void draw(Graphics g, int x, int y) {
+		g.fillRect(x, y, Block.width, Block.height);
+		g.drawString(Integer.toString(bit), x + (Block.width/2), y + (Block.height/2));
+	}
 }

@@ -1,12 +1,16 @@
 package game;
 
+import java.awt.Graphics;
+
 public class BlockRow {
 	private Block[] bitString;
 	//private int bitValue;
 	private int numBits;
+	private long t;
 	
 	public BlockRow(int numBits) {
 		this.numBits = numBits;
+		t = System.nanoTime();
 		bitString = new Block[this.numBits];
 		
 		for(int i = 0; i < numBits; i++){
@@ -55,6 +59,16 @@ public class BlockRow {
 
 	public boolean checkGuess(int i) {
 		return i == calcValue();
+	}
+	
+	public void draw(Graphics g, int rightEdge, int y) {
+		for (int i = 0; i < bitString.length; ++i) {
+			bitString[i].draw(g, rightEdge - ((Block.width + Block.spacing) * (numBits - i)), y);
+		}
+	}
+	
+	public long getElapsedTime() {
+		return System.nanoTime() - t;
 	}
 //	public static void main(String [] args){
 //		BlockRow row = new BlockRow(2);
