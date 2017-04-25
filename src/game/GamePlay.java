@@ -2,7 +2,7 @@ package game;
 
 import java.util.LinkedList;
 
-import clueGame.Board;
+
 
 public class GamePlay {
 	private int level;

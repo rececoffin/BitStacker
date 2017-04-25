@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import clueGame.Board;
 import game.GamePlay;
 
 public class ControlPanel extends JPanel{
