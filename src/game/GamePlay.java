@@ -2,9 +2,12 @@ package game;
 
 import java.util.LinkedList;
 
+import clueGame.Board;
+
 public class GamePlay {
 	private int level;
 	private int score;
+	private static GamePlay theInstance = new GamePlay();
 	public GamePlay() {
 		//default the level to 1
 		level = 1;
@@ -38,5 +41,13 @@ public class GamePlay {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	public void submitAnswer(){
+		
+	}
+
+	public static GamePlay getInstance() {
+		return theInstance;
+	}
+
 
 }
