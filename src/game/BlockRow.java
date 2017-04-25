@@ -54,7 +54,6 @@ public class BlockRow {
 	}
 
 	public boolean checkGuess(int i) {
-		// TODO Auto-generated method stub
 		return i == calcValue();
 	}
 //	public static void main(String [] args){
