@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -14,9 +16,12 @@ public class SidePanels extends JPanel{
 	private JTextField scoreValue;
 	public SidePanels(boolean left){
 		//instance = this;
+		setPreferredSize(new Dimension(200, 100));
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.VERTICAL;
 		if (left){
 			//set grid
-			setLayout(new GridLayout(2,0));
+			setLayout(new GridLayout(2,60));
 			//set color
 			setBackground(new Color(0,255,255));
 			JLabel label = new JLabel("Level");
@@ -30,7 +35,7 @@ public class SidePanels extends JPanel{
 		}
 		if (!left){
 			//set grid
-			setLayout(new GridLayout(2,0));
+			setLayout(new GridLayout(2,60));
 			//set color
 			setBackground(new Color(0,255,85));
 			JLabel label = new JLabel("Score");
