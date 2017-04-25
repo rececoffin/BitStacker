@@ -39,7 +39,9 @@ public class BlockRow {
 	}
 
 	public boolean checkGuess(int i) {
-		// TODO Auto-generated method stub
+		if (bitValue == i) {
+			return true;
+		}
 		return false;
 	}
 	

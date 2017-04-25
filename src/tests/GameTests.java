@@ -101,17 +101,10 @@ public class GameTests {
 		blocks.get(0).setValue(3);
 		blocks.add(new BlockRow(2));
 		blocks.get(1).setValue(0);
-		
-		assertEquals(2, blocks.size());
+		gp.setList(blocks);
+		assertEquals(2, gp.getBlocks().size());
 		//user enters 3, should return true
-		assertTrue(blocks.get(0).checkGuess(3));
-		
-		for(BlockRow br: blocks){
-			if(br.checkGuess(3)){
-				blocks.remove(br);
-				gp.incrementScore();
-			}
-		}
+		assertTrue(gp.checkGuess(3));
 		//the block was removed
 		assertEquals(1, blocks.size());
 		//the score was updated
@@ -131,11 +124,11 @@ public class GameTests {
 	public void testGameOver(){
 		GamePlay gp = new GamePlay();
 		LinkedList<BlockRow> blocks = new LinkedList<BlockRow>();
-		//add 8 blocks, game should end
-		for(int i = 0; i < 8; i++){
+		//add 10 blocks, game should end
+		for(int i = 0; i < 10; i++){
 			blocks.add(new BlockRow(2));
 		}
-		assertEquals(8, blocks.size());
+		assertEquals(10, blocks.size());
 		//game should end when the size is 8
 		gp.setList(blocks);
 		assertTrue(gp.gameOver());
