@@ -2,7 +2,7 @@ package game;
 
 public class BlockRow {
 	private Block[] bitString;
-	private int bitValue;
+	//private int bitValue;
 	private int numBits;
 	
 	public BlockRow(int numBits) {
@@ -12,8 +12,6 @@ public class BlockRow {
 		for(int i = 0; i < numBits; i++){
 			bitString[i] = new Block();
 		}
-		
-		bitValue = 0;
 	}
 
 	public Block[] getBitString() {
@@ -31,18 +29,47 @@ public class BlockRow {
 
 	public void setString(Block[] bitString) {
 		this.bitString = bitString;
-		
 	}
 
 	public void setValue(int bitValue) {
-		this.bitValue = bitValue;
+		System.out.println("BlockRow.setValue(" + bitValue + ") should not be called in the actual game, just for testing.");
+		if(bitValue < 0){
+			System.out.println("BlockRow.setValue() can't take negative values right now.");
+			return;
+		}
+		if(bitValue >= Math.pow(2, numBits)){
+			System.out.println("BlockRow.setValue() was given a value that is too large.");
+			return;
+		}
+		for(int i = 0; i < bitString.length; i++){
+			int thisBitValue =  (int) Math.pow(2, numBits - i - 1);
+			if(bitValue >= thisBitValue){
+				bitValue -= thisBitValue;
+				bitString[i].setBit(1);
+				//System.out.println("Set bit at index " + i);
+			}else{
+				bitString[i].setBit(0);
+			}
+		}
 	}
 
 	public boolean checkGuess(int i) {
 		// TODO Auto-generated method stub
-		return false;
+		return i == calcValue();
 	}
-	
+//	public static void main(String [] args){
+//		BlockRow row = new BlockRow(2);
+//		row.setValue(4);
+//		
+//		row.setValue(0);
+//		System.out.println("Done with 0");
+//		
+//		row.setValue(3);
+//		
+//		row.setValue(2);
+//		
+//		row.setValue(1);
+//	}
 	
 
 }
