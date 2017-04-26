@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 
@@ -21,27 +22,34 @@ public class SidePanels extends JPanel{
 		c.fill = GridBagConstraints.VERTICAL;
 		if (left){
 			//set grid
-			setLayout(new GridLayout(2,60));
+		//	setLayout(new GridLayout(2,60));
 			//set color
 			setBackground(new Color(0,255,255));
-			JLabel label = new JLabel("Level");
-			
-			level = new JTextField(15);
+			JLabel label = new JLabel("Level:");
+			label.setFont(new Font("Impact", Font.PLAIN, 35));
+			label.setForeground(Color.WHITE);
+			level = new JTextField(3);
 			level.setEditable(false);
+			level.setBackground(new Color(0,255,255));
+			level.setFont(new Font("Impact", Font.PLAIN, 35));
+			level.setForeground(Color.WHITE);
 			levelValue = level;
 			add(label);
 			add(level);
 			
 		}
 		if (!left){
-			//set grid
-			setLayout(new GridLayout(2,60));
-			//set color
-			setBackground(new Color(0,255,85));
-			JLabel label = new JLabel("Score");
 			
-			score = new JTextField(15);
+			setBackground(new Color(0,255,85));
+			
+			JLabel label = new JLabel("Score:");
+			label.setFont(new Font("Impact", Font.PLAIN, 35));
+			label.setForeground(Color.WHITE);
+			score = new JTextField(3);
 			score.setEditable(false);
+			score.setBackground(new Color(0,255,85));
+			score.setFont(new Font("Impact", Font.PLAIN, 35));
+			score.setForeground(Color.WHITE);
 			scoreValue = score;
 			add(label);
 			add(score);
@@ -49,7 +57,10 @@ public class SidePanels extends JPanel{
 		}
 	}
 	public void setLevel(int level){
-		levelValue.setText(Integer.toString(level));
+		
+			levelValue.setText(Integer.toString(level));
+		
+		
 	}
 	public void setScore(int score){
 		scoreValue.setText(Integer.toString(score));

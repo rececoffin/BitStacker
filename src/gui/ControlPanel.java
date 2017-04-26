@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import com.sun.xml.internal.ws.api.Component;
 
 import game.GamePlay;
 
@@ -38,7 +41,11 @@ public class ControlPanel extends JPanel{
 	}
 	private JPanel createLabel(){
 		JPanel p = new JPanel();
-		JLabel label = new JLabel("Enter Answer");
+		JLabel label = new JLabel("Enter Answer: ");
+		label.setFont(new Font("Impact", Font.PLAIN, 35));
+		label.setForeground(Color.WHITE);
+		label.setAlignmentX(CENTER_ALIGNMENT);
+		label.setAlignmentY(CENTER_ALIGNMENT);
 		p.add(label);
 		p.setPreferredSize(new Dimension(60,100));
 		p.setBackground(new Color(255,3,214));
@@ -48,8 +55,11 @@ public class ControlPanel extends JPanel{
 	private JPanel createInput(){
 		JPanel p = new JPanel();
 		textBox = new JTextField(15);
+		textBox.setPreferredSize( new Dimension( 300, 30 ) );
+	
 		p.add(textBox);
 		p.setBackground(new Color(255,3,214));
+		
 		return p;
 	}
 	
@@ -58,9 +68,15 @@ public class ControlPanel extends JPanel{
 		JButton button = new JButton(" Submit ");
 		button.setBackground(new Color(0,255,188));
 		button.addMouseListener(new SubmitListener());
+		button.setForeground(Color.WHITE);
+		button.setFont(new Font("Impact", Font.PLAIN, 35));
+		button.setPreferredSize(new Dimension(200,75));
+		button.setAlignmentX(CENTER_ALIGNMENT);
+		button.setAlignmentY(CENTER_ALIGNMENT);
 		p.add(button);
 		p.setPreferredSize(new Dimension(60,100));
 		p.setBackground(new Color(255,3,214));
+	
 		return p;
 	}
 	
