@@ -27,7 +27,9 @@ public class Block {
 	public void setBit(int b) {
 		this.bit = b;
 	}
-	
+	//101 binary = 4 + 0 + 1 = 5 decimal
+
+	//"1 = 20 = 1 10 = 21 = 2 100 = 22 = 4 1000 = 23 = 8 10000 = 24 = 16"
 	public void setRandomColor(){
 		Random r = new Random();
 		int n = r.nextInt(7);

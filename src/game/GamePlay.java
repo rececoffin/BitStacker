@@ -13,6 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 
 import gui.ControlPanel;
+import gui.Introduction;
 import gui.MiddlePanel;
 import gui.SidePanels;
 
@@ -21,6 +22,7 @@ import gui.SidePanels;
 public class GamePlay {
 	private int level;
 	private static MainDisplay md;
+	private static IntroDisplay id;
 	private int score;
 	public int answer;
 	private static GamePlay theInstance = new GamePlay();
@@ -66,9 +68,11 @@ public class GamePlay {
  
 	public static void main(String[] args) {
 		
+		
 		md = new MainDisplay();
 		md.setVisible(true);
-		
+		id = new IntroDisplay();
+		id.setVisible(true);
 	}
 }
 class MainDisplay extends JFrame{
@@ -104,5 +108,18 @@ class MainDisplay extends JFrame{
 //		this.add(left);
 //		this.add(right);
 //		this.add(mp);
+	}
+}
+class IntroDisplay extends JFrame{
+	public IntroDisplay(){
+		JFrame frame = new JFrame();
+		setSize(1250, 850);
+		//setLayout(new GridBagLayout());
+		setTitle("Bit Stacker");
+		setBackground(new Color(3,3,54));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		Introduction intro = new Introduction();
+		this.add(intro, BorderLayout.CENTER);
+
 	}
 }
