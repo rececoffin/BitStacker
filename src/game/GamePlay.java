@@ -24,6 +24,7 @@ public class GamePlay {
 	private static MainDisplay md;
 	private static IntroDisplay id;
 	private int score;
+	public static Boolean start = false;
 	public int answer;
 	private static GamePlay theInstance = new GamePlay();
 	public GamePlay() {
@@ -67,16 +68,18 @@ public class GamePlay {
 
  
 	public static void main(String[] args) {
+		if (start){
+			md = new MainDisplay();
+			md.setVisible(true);
+		}
 		
-		
-		md = new MainDisplay();
-		md.setVisible(true);
 		id = new IntroDisplay();
 		id.setVisible(true);
 	}
 }
 class MainDisplay extends JFrame{
 	public MainDisplay(){
+		
 		JFrame frame = new JFrame();
 		setSize(900, 850);
 		//setLayout(new GridBagLayout());
@@ -99,15 +102,7 @@ class MainDisplay extends JFrame{
 		
 		this.add(cp, BorderLayout.SOUTH);
 		this.add(mp, BorderLayout.CENTER);
-//text.setFont(new Font("Serif", font.BOLD, 50));
 
-		//this.pack();
-		
-		
-//		this.add(cp);
-//		this.add(left);
-//		this.add(right);
-//		this.add(mp);
 	}
 }
 class IntroDisplay extends JFrame{
@@ -115,10 +110,10 @@ class IntroDisplay extends JFrame{
 		JFrame frame = new JFrame();
 		setSize(1250, 850);
 		//setLayout(new GridBagLayout());
-		setTitle("Bit Stacker");
+		setTitle("Bit Stacker Intro");
 		setBackground(new Color(3,3,54));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Introduction intro = new Introduction();
+		
+		Introduction intro = new Introduction(frame);
 		this.add(intro, BorderLayout.CENTER);
 
 	}

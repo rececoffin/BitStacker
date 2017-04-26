@@ -8,13 +8,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import game.GamePlay;
+
 
 public class Introduction extends JPanel{
-	public Introduction(){
+	private JFrame bigFrame;
+
+	public Introduction(JFrame frame){
+		bigFrame = frame;
 		setBackground(Color.BLACK);
 		setLayout(new GridLayout(4, 0));
 		JPanel panel = title1Panel();
@@ -30,6 +36,11 @@ public class Introduction extends JPanel{
 		panel.setBackground(new Color(3,3,54));
 		add(panel);
 	
+	}
+	private void playGame(){									//to do 
+		bigFrame.setVisible(false);
+		System.out.println("HELP MOTHER FUCKER");
+		GamePlay.getInstance().start = true;
 	}
 	private JPanel title1Panel(){
 		JPanel p = new JPanel();
@@ -104,32 +115,32 @@ public class Introduction extends JPanel{
 	private JPanel instructionPanel(){
 		JPanel p = new JPanel();
 		JLabel box = new JLabel("The binary number system is a base-2 number system. This means it only has two numbers: 0 and 1.");
-		box.setForeground(new Color(0,255,255));
+		box.setForeground(new Color(178,102,255));
 		box.setFont(new Font("Impact", Font.PLAIN, 25));
 		p.add(box);
 	    box = new JLabel("In a binary number each place represents a power of 2. For example:");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    
 	    box = new JLabel("1 = 2^0 = 1");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    box = new JLabel("10 = 2^1 = 2");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    box = new JLabel("100 = 2^2 = 4");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    box = new JLabel("1000 = 2^3 = 8");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    box = new JLabel("For example: 101 binary = 4 + 0 + 1 = 5 decimal");
-	    box.setForeground(new Color(0,255,255));
+	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 		return p;
@@ -145,9 +156,7 @@ public class Introduction extends JPanel{
 		p.add(button);
 		return p;
 	}
-	private void playGame(){									//to do 
-		
-	}
+
 	private class StartListener implements MouseListener{
 		@Override
 		public void mouseClicked(MouseEvent e) {
