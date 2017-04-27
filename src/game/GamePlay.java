@@ -128,6 +128,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
 		int target = blockPaneHeight - (Block.height + Block.spacing) * blocks.size();
+		return false;
 
 	}
 	
@@ -136,6 +137,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		//Speed is in pixels per second
 		double pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
 		int rowsOnStack = blocks.size() - 1;//-1 because the moving row is not on the stack
+		return rowsOnStack;
 	}
 	
 	//Add a new block - happens when the old one has reached the top of the stack of blocks

@@ -41,6 +41,8 @@ public class ControlPanel extends JPanel{
 //	}
 	private JPanel createLabel(){
 		JPanel p = new JPanel();
+		JLabel box = new JLabel("                                                                                                                                                              ");
+		p.add(box);
 		JLabel label = new JLabel("Enter Answer: ");
 		label.setFont(new Font("Impact", Font.PLAIN, 35));
 		label.setForeground(Color.WHITE);
@@ -54,9 +56,11 @@ public class ControlPanel extends JPanel{
 	
 	private JPanel createInput(){
 		JPanel p = new JPanel();
+		JLabel box = new JLabel("                                                                                                                                                                 ");
+		p.add(box);
 		textBox = new JTextField(15);
-		textBox.setPreferredSize( new Dimension( 300, 30 ) );
-	
+		textBox.setPreferredSize( new Dimension( 300, 40 ) );
+		textBox.setFont(new Font("Impact", Font.PLAIN, 20));
 		p.add(textBox);
 		p.setBackground(new Color(255,3,214));
 		
@@ -65,14 +69,14 @@ public class ControlPanel extends JPanel{
 	
 	private JPanel createButton(){
 		JPanel p = new JPanel();
+		
 		JButton button = new JButton(" Submit ");
 		button.setBackground(new Color(0,255,188));
 		button.addMouseListener(new SubmitListener());
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Impact", Font.PLAIN, 35));
-		button.setPreferredSize(new Dimension(200,75));
-		button.setAlignmentX(CENTER_ALIGNMENT);
-		button.setAlignmentY(CENTER_ALIGNMENT);
+		button.setPreferredSize(new Dimension(200,80));
+		
 		p.add(button);
 		p.setPreferredSize(new Dimension(60,100));
 		p.setBackground(new Color(255,3,214));

@@ -28,7 +28,7 @@ public class Introduction extends JDialog{
 	//	bigFrame = frame;
 		setSize(1250, 850);
 		setBackground(Color.BLACK);
-		setLayout(new GridLayout(4, 0));
+		setLayout(new GridLayout(5, 0));
 		JPanel panel = title1Panel();
 		panel.setBackground(new Color(3,3,54));
 		add(panel);
@@ -36,6 +36,9 @@ public class Introduction extends JDialog{
 		panel.setBackground(new Color(3,3,54));
 		add(panel);
 		panel = instructionPanel();
+		panel.setBackground(new Color(3,3,54));
+		add(panel);
+		panel = instructionPanel1();
 		panel.setBackground(new Color(3,3,54));
 		add(panel);
 		panel = buttonPanel();
@@ -118,7 +121,11 @@ public class Introduction extends JDialog{
 	}
 	private JPanel instructionPanel(){
 		JPanel p = new JPanel();
-		JLabel box = new JLabel("The binary number system is a base-2 number system. This means it only has two numbers: 0 and 1.");
+		JLabel box = new JLabel("                                                                                                                                                              ");
+		box.setForeground(new Color(178,102,255));
+		box.setFont(new Font("Impact", Font.PLAIN, 25));
+		p.add(box);
+		 box = new JLabel("The binary number system is a base-2 number system. This means it only has two numbers: 0 and 1.");
 		box.setForeground(new Color(178,102,255));
 		box.setFont(new Font("Impact", Font.PLAIN, 25));
 		p.add(box);
@@ -127,19 +134,19 @@ public class Introduction extends JDialog{
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
 	    
-	    box = new JLabel("1 = 2^0 = 1");
+	    box = new JLabel("1 = 2^0 = 1;");
 	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
-	    box = new JLabel("10 = 2^1 = 2");
+	    box = new JLabel("10 = 2^1 = 2;");
 	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
-	    box = new JLabel("100 = 2^2 = 4");
+	    box = new JLabel("100 = 2^2 = 4;");
 	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
-	    box = new JLabel("1000 = 2^3 = 8");
+	    box = new JLabel("1000 = 2^3 = 8;");
 	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
@@ -147,6 +154,15 @@ public class Introduction extends JDialog{
 	    box.setForeground(new Color(178,102,255));
 	    box.setFont(new Font("Impact", Font.PLAIN, 25));
 	    p.add(box);
+		return p;
+	}
+	private JPanel instructionPanel1(){
+		JPanel p = new JPanel();
+		JLabel box = new JLabel("To play, enter the value of the bit string (series of bits) into the text box and press enter!");
+		box.setForeground(new Color(178,102,255));
+		box.setFont(new Font("Impact", Font.PLAIN, 25));
+		p.add(box);
+	   
 		return p;
 	}
 	private JPanel buttonPanel(){
