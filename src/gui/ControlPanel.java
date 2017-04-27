@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -26,6 +28,7 @@ public class ControlPanel extends JPanel{
 		
 		setBackground(new Color(255,3,214));
 		setLayout(new GridLayout(1, 3));
+	
 		JPanel panel = createLabel();
 		add(panel, BorderLayout.CENTER);
 		panel = createInput();
@@ -61,6 +64,7 @@ public class ControlPanel extends JPanel{
 		textBox = new JTextField(15);
 		textBox.setPreferredSize( new Dimension( 300, 40 ) );
 		textBox.setFont(new Font("Impact", Font.PLAIN, 20));
+		textBox.addKeyListener(new EnterListener());
 		p.add(textBox);
 		p.setBackground(new Color(255,3,214));
 		
@@ -73,6 +77,7 @@ public class ControlPanel extends JPanel{
 		JButton button = new JButton(" Submit ");
 		button.setBackground(new Color(0,255,188));
 		button.addMouseListener(new SubmitListener());
+	
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Impact", Font.PLAIN, 35));
 		button.setPreferredSize(new Dimension(200,80));
@@ -113,5 +118,32 @@ public class ControlPanel extends JPanel{
 			// TODO Auto-generated method stub
 			
 		}
+	}
+	private class EnterListener implements KeyListener{
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_ENTER){
+				
+				String answer = textBox.getText();
+				int v = Integer.parseInt(answer);
+				GamePlay.getInstance().answer = v;
+				System.out.println(GamePlay.getInstance().answer);
+				textBox.setText("");
+			}
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+		
+			
+		}
+		
 	}
 }
