@@ -67,9 +67,11 @@ public class BlockRow {
 		}
 	}
 	
-	public long getElapsedTime() {
-		return System.nanoTime() - t;
+	public double getElapsedTimeSeconds() {
+		//This might not work because the long int risks losing a lot when cast to double, I haven't thought through all the details maybe it's fine
+		return (double)(System.nanoTime() - t) / 1000000000.0;
 	}
+	
 //	public static void main(String [] args){
 //		BlockRow row = new BlockRow(2);
 //		row.setValue(4);
