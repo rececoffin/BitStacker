@@ -12,7 +12,6 @@ import game.GamePlay;
 public class MiddlePanel extends JPanel{
 	public static MiddlePanel instance = new MiddlePanel();
 	public MiddlePanel(){
-		instance = this;
 		//set grid
 		//set color
 		GridBagConstraints c = new GridBagConstraints();
@@ -20,6 +19,7 @@ public class MiddlePanel extends JPanel{
 		setBackground(new Color(3,3,54));
 		//mess with this
 		setPreferredSize(getSize());
+		setVisible(true);
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -29,7 +29,7 @@ public class MiddlePanel extends JPanel{
 		GamePlay.getInstance().drawGame(g);
 	}
 	public void requestRepaint(){
-		System.out.println("repaint");
+		//System.out.println("repaint");
 		repaint();
 	}
 	static public MiddlePanel getInstance(){

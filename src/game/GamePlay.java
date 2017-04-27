@@ -138,6 +138,7 @@ public class GamePlay{
 	
 	public void drawGame(Graphics g) {
 		int counter = 0;
+		rightEdge = MiddlePanel.getInstance().getX() + MiddlePanel.getInstance().getWidth();
 		for (BlockRow b : blocks) {
 			if (blocks.getLast() == b) {
 				b.draw(g, rightEdge, getFloatingBlockPosition());
@@ -153,19 +154,19 @@ public class GamePlay{
 	void update(){
 		//System.out.println("Update");
 		//This is where the game checks if the row has gotten to the point where it needs
-		System.out.println("number of blocks = " + blocks.size());
+		///ystem.out.println("number of blocks = " + blocks.size());
 		if(blocks.size() == 0 || timeForNewBlockRow()){
 			addBlockRow();
 		}
 		//May have been wrong about needing this because paintComponent might be doing the same thing.
-		//MiddlePanel.getInstance().requestRepaint();
+		MiddlePanel.getInstance().requestRepaint();
 	}
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
-		System.out.println("the position of the floating block is: " + currentPosition);
+		//System.out.println("the position of the floating block is: " + currentPosition);
 		int target = blockPaneHeight - (Block.height + Block.spacing) * (blocks.size());
-		System.out.println("target = " + target);
+		//System.out.println("target = " + target);
 		return currentPosition > target;
 
 	}
@@ -189,22 +190,16 @@ public class GamePlay{
 	//}
 	public static void main(String[] args) {
 		
-			md = new MainDisplay();
+		md = MainDisplay.getFrameInstance();
 			
-			
-			//md.setVisible(true);
-		
-		
 		id = new Introduction();
 		id.setVisible(true);
-		int i = 0;
 		//main will need to call update to move the block every frame like it's supposed to.
 		while(true){
 			GamePlay.getInstance().update();
-			i++;
-			if(i > 10000){
-				break;
-			}
+			//if(i > 10000){
+			//	break;
+			//}
 		}
 		
 	}
