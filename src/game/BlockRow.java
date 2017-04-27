@@ -65,6 +65,7 @@ public class BlockRow {
 	}
 	
 	public void draw(Graphics g, int rightEdge, int y) {
+		System.out.println("drawing a block row");
 		for (int i = 0; i < bitString.length; ++i) {
 			bitString[i].draw(g, rightEdge - ((Block.width + Block.spacing) * (numBits - i)), y);
 		}

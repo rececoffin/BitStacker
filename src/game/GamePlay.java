@@ -27,7 +27,7 @@ import java.util.LinkedList;
 import java.awt.Graphics;
 
 
-public class GamePlay extends JPanel{//Is JPanel going to go on this one?
+public class GamePlay{
 	
 	private static MainDisplay md;
 	private static Introduction id;
@@ -63,14 +63,14 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	//Speed is in pixels per second
 	private double speed;
 	private int rightEdge;
-	private int blockPaneHeight;
+	private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
 	
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
-		speed = 1;
+		speed = 200;
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
@@ -112,8 +112,21 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		return level;
 
 	}
+	//Call this when the submit button is pressed
+	public void submitButton(int submission){
+		if(checkGuess(submission)){
+			//The guess was right
+			//Destroy the bottom row
+			blocks.removeLast();
+		}else{
+			//The guess was wrong
+		}
+		MiddlePanel.getInstance().requestRepaint();
 
+	}
+	
 	public boolean checkGuess(int guess) {
+		System.out.println("checking " + guess);
 		if (blocks.getFirst().checkGuess(guess)) {
 			blocks.removeFirst();
 			incrementScore();
@@ -123,7 +136,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	}
 	
 	
-	public void paintComponent(Graphics g) {
+	public void drawGame(Graphics g) {
 		int counter = 0;
 		for (BlockRow b : blocks) {
 			if (blocks.getLast() == b) {
@@ -138,36 +151,42 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	
 	//Updates the game - a new frame
 	void update(){
+		//System.out.println("Update");
 		//This is where the game checks if the row has gotten to the point where it needs
-		//int blockPosition = getFloatingBlockPosition();
-		if(timeForNewBlockRow()){
+		System.out.println("number of blocks = " + blocks.size());
+		if(blocks.size() == 0 || timeForNewBlockRow()){
 			addBlockRow();
 		}
 		//May have been wrong about needing this because paintComponent might be doing the same thing.
-		repaint();
+		//MiddlePanel.getInstance().requestRepaint();
 	}
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
-		int target = blockPaneHeight - (Block.height + Block.spacing) * blocks.size();
-		return false;
+		System.out.println("the position of the floating block is: " + currentPosition);
+		int target = blockPaneHeight - (Block.height + Block.spacing) * (blocks.size());
+		System.out.println("target = " + target);
+		return currentPosition > target;
 
 	}
 	
 	int getFloatingBlockPosition(){
 		//Move the first block in the linked list's position down.
 		//Speed is in pixels per second
+		
 		double pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
-		int rowsOnStack = blocks.size() - 1;//-1 because the moving row is not on the stack
-		return rowsOnStack;
+		//int rowsOnStack = blocks.size() - 1;//-1 because the moving row is not on the stack
+		return (int)pixelsTraveled;
 	}
 	
 	//Add a new block - happens when the old one has reached the top of the stack of blocks
-	void addBlockRow(){
+	private void addBlockRow(){
 		BlockRow newRow = new BlockRow(level);//For now I'm using level for this
 		blocks.addFirst(newRow);
 	}
-	
+	//void initGame(){
+	//	
+	//}
 	public static void main(String[] args) {
 		
 			md = new MainDisplay();
@@ -178,10 +197,14 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		
 		id = new Introduction();
 		id.setVisible(true);
-		
+		int i = 0;
 		//main will need to call update to move the block every frame like it's supposed to.
 		while(true){
 			GamePlay.getInstance().update();
+			i++;
+			if(i > 10000){
+				break;
+			}
 		}
 		
 	}

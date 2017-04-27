@@ -19,12 +19,16 @@ import javax.swing.JTextField;
 import com.sun.xml.internal.ws.api.Component;
 
 import game.GamePlay;
+import game.MainDisplay;
 
 public class ControlPanel extends JPanel{
 	JTextField textBox;
 	int intAnswer;
+	public static final int CONTROL_PANEL_HEIGHT = 100;
+	public static final int GAME_PANEL_HEIGHT = MainDisplay.MAIN_DISPLAY_HEIGHT - CONTROL_PANEL_HEIGHT;
+
 	public ControlPanel(){
-		setPreferredSize(new Dimension(200,100));
+		setPreferredSize(new Dimension(200, CONTROL_PANEL_HEIGHT));
 		
 		setBackground(new Color(255,3,214));
 		setLayout(new GridLayout(1, 3));
@@ -39,12 +43,15 @@ public class ControlPanel extends JPanel{
 		panel = createButton();
 		add(panel, BorderLayout.CENTER);
 	}
-//	public void submitAnswer(){
-//		String answer = textBox.getText();
-//		int v = Integer.parseInt(answer);
-//		GamePlay.getInstance().answer = v;
-//		
-//	}
+	public void submitEvent(){
+		String answer = textBox.getText();
+		int v = Integer.parseInt(answer);
+		textBox.setText("");
+
+		
+		GamePlay.getInstance().submitButton(v);
+		
+	}
 	private JPanel createLabel(){
 		JPanel p = new JPanel();
 		JLabel box = new JLabel("                                                                                                                                                              ");
@@ -110,11 +117,9 @@ public class ControlPanel extends JPanel{
 		}
 		@Override
 		public void mousePressed(MouseEvent e) {
-			String answer = textBox.getText();
-			int v = Integer.parseInt(answer);
-			GamePlay.getInstance().setAnswer(v);
-			System.out.println(GamePlay.getInstance().getAnswer());
-			textBox.setText("");
+			//GamePlay.getInstance().setAnswer(v);
+			submitEvent();
+
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {
@@ -136,14 +141,11 @@ public class ControlPanel extends JPanel{
 		public void keyReleased(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_ENTER){
 				
-				String answer = textBox.getText();
-				int v = Integer.parseInt(answer);
 				//if (v == null){
 					
 				//}
-				GamePlay.getInstance().setAnswer(v);
-				System.out.println(GamePlay.getInstance().getAnswer());
-				textBox.setText("");
+				//GamePlay.getInstance().setAnswer(v);
+				submitEvent();
 			}
 			
 		}

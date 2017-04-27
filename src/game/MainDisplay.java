@@ -11,17 +11,18 @@ import gui.MiddlePanel;
 import gui.SidePanels;
 
 public class MainDisplay extends JFrame{
+	public static final int MAIN_DISPLAY_HEIGHT = 850;
 	private static MainDisplay frameInstance = new MainDisplay();
 	
 	public MainDisplay(){
 		
 		JFrame frame = new JFrame();
-		setSize(900, 850);
+		setSize(900, MAIN_DISPLAY_HEIGHT);
 		//setLayout(new GridBagLayout());
 		setTitle("Bit Stacker");
 		setBackground(new Color(3,3,54));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MiddlePanel mp = new MiddlePanel();
+		MiddlePanel mp = MiddlePanel.getInstance();
 		SidePanels left = new SidePanels(true);
 		SidePanels right = new SidePanels(false);
 		ControlPanel cp = new ControlPanel();

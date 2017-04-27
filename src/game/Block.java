@@ -84,6 +84,7 @@ public class Block {
 	}
 
 	public void draw(Graphics g, int x, int y) {
+		System.out.println("drawing a block");
 		g.fillRect(x, y, Block.width, Block.height);
 		g.drawString(Integer.toString(bit), x + (Block.width/2), y + (Block.height/2));
 	}
