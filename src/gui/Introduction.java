@@ -78,7 +78,7 @@ public class Introduction extends JDialog{
 		letter.setForeground(new Color(0,255,188));
 		p.add(letter);
 		
-		 letter = new JLabel("T");
+		letter = new JLabel("T");
 		letter.setFont(new Font("Impact", Font.PLAIN, 150));
 		letter.setBackground(new Color(0,255,255));
 		letter.setForeground(new Color(255,162,0));
