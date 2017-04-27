@@ -10,20 +10,23 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import game.GamePlay;
+import game.MainDisplay;
 
 
-public class Introduction extends JPanel{
+public class Introduction extends JDialog{
 	private JFrame bigFrame;
-	
+	private static MainDisplay main = MainDisplay.getFrameInstance();
 
-	public Introduction(JFrame frame){
-		bigFrame = frame;
+	public Introduction(){
+	//	bigFrame = frame;
+		setSize(1250, 850);
 		setBackground(Color.BLACK);
 		setLayout(new GridLayout(4, 0));
 		JPanel panel = title1Panel();
@@ -191,8 +194,9 @@ public class Introduction extends JPanel{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			bigFrame.setVisible(false);
-			
+			//bigFrame.setVisible(false);
+			dispose();
+			main.setVisible(true);
 		}
 		
 	}

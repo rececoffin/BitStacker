@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import sun.applet.Main;
 
 import javax.swing.BoxLayout;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 
 import gui.ControlPanel;
@@ -28,7 +29,7 @@ import java.awt.Graphics;
 public class GamePlay {
 	
 	private static MainDisplay md;
-	private static IntroDisplay id;
+	private static Introduction id;
 	
 	public static Boolean start = false;
 	public int answer;
@@ -115,10 +116,10 @@ public class GamePlay {
 	public static void main(String[] args) {
 		
 			md = new MainDisplay();
-			md.setVisible(true);
+			//md.setVisible(true);
 		
 		
-		id = new IntroDisplay();
+		id = new Introduction();
 		id.setVisible(true);
 	}
 }
@@ -127,52 +128,20 @@ public class GamePlay {
 
 
 
-
-class MainDisplay extends JFrame{
-	public MainDisplay(){
-		
-		JFrame frame = new JFrame();
-		setSize(900, 850);
-		//setLayout(new GridBagLayout());
-		setTitle("Bit Stacker");
-		setBackground(new Color(3,3,54));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MiddlePanel mp = new MiddlePanel();
-		SidePanels left = new SidePanels(true);
-		SidePanels right = new SidePanels(false);
-		ControlPanel cp = new ControlPanel();
-		left.setLevel(1);
-		right.setScore(0);
-		FlowLayout flowLay = (FlowLayout) left.getLayout();
-		flowLay.setAlignment(FlowLayout.LEFT);
-		this.add(left, BorderLayout.WEST);
-		
-	    FlowLayout newFlow = (FlowLayout) right.getLayout();
-	    newFlow.setAlignment(FlowLayout.RIGHT);
-		this.add(right, BorderLayout.EAST);
-		
-		this.add(cp, BorderLayout.SOUTH);
-		this.add(mp, BorderLayout.CENTER);
-
-	}
-}
-
-
-
-
-
-class IntroDisplay extends JFrame{
-	public IntroDisplay(){
-		JFrame frame = this;
-		setSize(1250, 850);
-		//setLayout(new GridBagLayout());
-		setTitle("Bit Stacker Intro");
-		setBackground(new Color(3,3,54));
-		
-		Introduction intro = new Introduction(frame);
-		this.add(intro, BorderLayout.CENTER);
-
-
-	}
+//
+//class IntroDisplay extends JDialog{
+//	public IntroDisplay(){
+//		//JFrame frame = this;
+//		setSize(1250, 850);
+//		//setLayout(new GridBagLayout());
+//		setTitle("Bit Stacker Intro");
+//		setBackground(new Color(3,3,54));
+//		
+//		Introduction intro = new Introduction();
+//	//	Introduction intro = new Introduction(frame);
+//		this.add(intro, BorderLayout.CENTER);
+//
+//
+//	}
 	
-}
+//}
