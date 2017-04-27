@@ -20,38 +20,42 @@ public class SidePanels extends JPanel{
 		setPreferredSize(new Dimension(200, 100));
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.VERTICAL;
+		//left panel
 		if (left){
 			//set grid
-		//	setLayout(new GridLayout(2,60));
 			//set color
 			setBackground(new Color(0,255,255));
 			JLabel label = new JLabel("Level:");
 			label.setFont(new Font("Impact", Font.PLAIN, 35));
 			label.setForeground(Color.WHITE);
+			add(label);
+			
+			//updating level text field
 			level = new JTextField(3);
 			level.setEditable(false);
 			level.setBackground(new Color(0,255,255));
 			level.setFont(new Font("Impact", Font.PLAIN, 35));
 			level.setForeground(Color.WHITE);
 			levelValue = level;
-			add(label);
 			add(level);
 			
 		}
+		
+		//right panel
 		if (!left){
-			
 			setBackground(new Color(0,255,85));
-			
 			JLabel label = new JLabel("Score:");
 			label.setFont(new Font("Impact", Font.PLAIN, 35));
 			label.setForeground(Color.WHITE);
+			add(label);
+			
+			//updatnig score text field
 			score = new JTextField(3);
 			score.setEditable(false);
 			score.setBackground(new Color(0,255,85));
 			score.setFont(new Font("Impact", Font.PLAIN, 35));
 			score.setForeground(Color.WHITE);
 			scoreValue = score;
-			add(label);
 			add(score);
 			
 		}

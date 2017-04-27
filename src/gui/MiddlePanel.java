@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 public class MiddlePanel extends JPanel{
 	public MiddlePanel(){
 		//set grid
-		//setLayout(new GridLayout(1,0));
 		//set color
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.CENTER;

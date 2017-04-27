@@ -29,10 +29,13 @@ public class ControlPanel extends JPanel{
 		setBackground(new Color(255,3,214));
 		setLayout(new GridLayout(1, 3));
 	
+		//Enter answer label
 		JPanel panel = createLabel();
 		add(panel, BorderLayout.CENTER);
+		//text box to get input
 		panel = createInput();
 		add(panel, BorderLayout.CENTER);
+		//submit button
 		panel = createButton();
 		add(panel, BorderLayout.CENTER);
 	}
@@ -119,6 +122,9 @@ public class ControlPanel extends JPanel{
 			
 		}
 	}
+	
+	
+	//enter key takes text box data
 	private class EnterListener implements KeyListener{
 
 		@Override
@@ -132,8 +138,8 @@ public class ControlPanel extends JPanel{
 				
 				String answer = textBox.getText();
 				int v = Integer.parseInt(answer);
-				GamePlay.getInstance().answer = v;
-				System.out.println(GamePlay.getInstance().answer);
+				GamePlay.getInstance().setAnswer(v);
+				System.out.println(GamePlay.getInstance().getAnswer());
 				textBox.setText("");
 			}
 			

@@ -52,6 +52,11 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	}
 	
 	private static GamePlay theInstance = new GamePlay();
+	
+	public static GamePlay getInstance() {
+		return theInstance;
+	}
+	
 	private int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
@@ -76,6 +81,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		return blocks;
 	}
 
+	//game is over when they get to level 10 or the blocks rech the top of screen
 	public boolean gameOver() {
 		if (level >= 10) {
 			return true;
@@ -85,10 +91,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		}
 		return false;
 	}
-
-	public static GamePlay getInstance() {
-		return theInstance;
-	}
+	
 	public void incrementScore(){
 		score++;
 		if (score >= 8) {

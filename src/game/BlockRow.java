@@ -22,6 +22,7 @@ public class BlockRow {
 		return bitString;
 	}
 
+	//calculate the value of the bits in a row
 	public int calcValue() {
 		int value = 0;
 		for(int i = 0; i < bitString.length; i++){
@@ -35,6 +36,8 @@ public class BlockRow {
 		this.bitString = bitString;
 	}
 
+	
+	
 	public void setValue(int bitValue) {
 		System.out.println("BlockRow.setValue(" + bitValue + ") should not be called in the actual game, just for testing.");
 		if(bitValue < 0){
