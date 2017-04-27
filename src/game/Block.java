@@ -17,6 +17,7 @@ public class Block {
 	public static final int spacing = 2;
 	public Block() {
 		bit = 0;
+		setRandomColor();
 	}
 
 	//generate a random bit value for a single block
@@ -40,6 +41,7 @@ public class Block {
 		Random r = new Random();
 		int n = r.nextInt(7);
 		switch (n){
+		//cat approved colors if you need one, the black background color is (3,3,54)
 		case 0: 
 			//purple
 			blockColor = new Color(153,0,255);
