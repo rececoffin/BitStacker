@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -18,6 +20,7 @@ import game.GamePlay;
 
 public class Introduction extends JPanel{
 	private JFrame bigFrame;
+	
 
 	public Introduction(JFrame frame){
 		bigFrame = frame;
@@ -147,43 +150,51 @@ public class Introduction extends JPanel{
 		JPanel p = new JPanel();
 		JButton button = new JButton(" PLAY ");
 		button.setBackground(new Color(0,255,188));
-		button.addMouseListener(new StartListener());
+		button.addActionListener(new StartListener());
 		button.setForeground(Color.WHITE);
 		button.setFont(new Font("Impact", Font.PLAIN, 35));
 		button.setPreferredSize(new Dimension(600,75));
 		p.add(button);
 		return p;
 	}
+//
+//	private class StartListener implements MouseListener{
+//		@Override
+//		public void mouseClicked(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		@Override
+//		public void mouseEntered(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		@Override
+//		public void mouseExited(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+//		@Override
+//		public void mousePressed(MouseEvent e) {
+//			playGame();
+//			bigFrame.setVisible(false);
+//			System.out.println("HELP MOTHER FUCKER");
+//			//GamePlay.getInstance().start = true;
+//			
+//		}
+//		@Override
+//		public void mouseReleased(MouseEvent e) {
+//			// TODO Auto-generated method stub
+//			
+//		}
+	private class StartListener implements ActionListener{
 
-	private class StartListener implements MouseListener{
 		@Override
-		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-		@Override
-		public void mousePressed(MouseEvent e) {
-			playGame();
+		public void actionPerformed(ActionEvent e) {
 			bigFrame.setVisible(false);
-			System.out.println("HELP MOTHER FUCKER");
-			GamePlay.getInstance().start = true;
 			
 		}
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+		
 	}
 }
 

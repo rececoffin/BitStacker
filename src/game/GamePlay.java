@@ -83,7 +83,7 @@ class MainDisplay extends JFrame{
 }
 class IntroDisplay extends JFrame{
 	public IntroDisplay(){
-		JFrame frame = new JFrame();
+		JFrame frame = this;
 		setSize(1250, 850);
 		//setLayout(new GridBagLayout());
 		setTitle("Bit Stacker Intro");
