@@ -138,6 +138,9 @@ public class ControlPanel extends JPanel{
 				
 				String answer = textBox.getText();
 				int v = Integer.parseInt(answer);
+				//if (v == null){
+					
+				//}
 				GamePlay.getInstance().setAnswer(v);
 				System.out.println(GamePlay.getInstance().getAnswer());
 				textBox.setText("");
