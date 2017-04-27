@@ -4,21 +4,13 @@ import static org.junit.Assert.*;
 
 import java.util.LinkedList;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import game.Block;
 import game.BlockRow;
 import game.GamePlay;
-import sun.misc.Queue;
 
 public class GameTests {
-//	private Block block;
-//	@Before
-//	public void setUp(){
-//		block = new Block();
-//		
-//	}
 	
 	//test that the 3 bit strings are generating a random 1 or 0
 	@Test
@@ -99,17 +91,32 @@ public class GameTests {
 	}
 	
 	
-	//tests that the blocks disapear when the user puts in the correct value
+	//tests that the blocks disappear when the user puts in the correct value
 	@Test
 	public void testDeletingBlock(){
-		//also test that the score is updated
 		LinkedList<BlockRow> blocks = new LinkedList<BlockRow>();
+		GamePlay gp = new GamePlay();
+		//add a couple blocks, delete the first
+		blocks.add(new BlockRow(2));
+		blocks.get(0).setValue(3);
+		blocks.add(new BlockRow(2));
+		blocks.get(1).setValue(0);
+		gp.setList(blocks);
+		assertEquals(2, gp.getBlocks().size());
+		//user enters 3, should return true
+		assertTrue(gp.checkGuess(3));
+		//the block was removed
+		assertEquals(1, blocks.size());
+		//the score was updated
+		assertEquals(1, gp.getScore());
+		//the level should default to 1
+		assertEquals(1, gp.getLevel());
+		for(int i = 0; i < 7; i++){
+			gp.incrementScore();
+		}
+		//after that loop, the level should change
+		assertEquals(2, gp.getLevel());
 		
-		//blocks.add(new)
-		
-		
-		//also test that it moves to the next level when they reach the correct score
-
 	}
 	
 	//test that the game is over when a block reaches the top
@@ -117,20 +124,14 @@ public class GameTests {
 	public void testGameOver(){
 		GamePlay gp = new GamePlay();
 		LinkedList<BlockRow> blocks = new LinkedList<BlockRow>();
-		//add 8 blocks, game should end
-		for(int i = 0; i < 8; i++){
+		//add 10 blocks, game should end
+		for(int i = 0; i < 10; i++){
 			blocks.add(new BlockRow(2));
 		}
-		assertEquals(8, blocks.size());
+		assertEquals(10, blocks.size());
 		//game should end when the size is 8
 		gp.setList(blocks);
 		assertTrue(gp.gameOver());
-	}
-	
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
 	}
 
 }
