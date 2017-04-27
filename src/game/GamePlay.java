@@ -40,7 +40,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	//Speed is in pixels per second
 	private double speed;
 	private int rightEdge;
-	private int y;
+	private int blockPaneHeight;
 	
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
@@ -108,7 +108,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 				b.draw(g, rightEdge, getFloatingBlockPosition());
 			}
 			else {
-				b.draw(g, rightEdge, y - (counter * (Block.height + Block.spacing)));
+				b.draw(g, rightEdge, blockPaneHeight - (counter * (Block.height + Block.spacing)));
 				counter++;
 			}
 		}
@@ -127,7 +127,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
-		int target = y - (Block.height + Block.spacing) * blocks.size();
+		int target = blockPaneHeight - (Block.height + Block.spacing) * blocks.size();
 
 	}
 	
