@@ -104,8 +104,8 @@ public class ControlPanel extends JPanel{
 		public void mousePressed(MouseEvent e) {
 			String answer = textBox.getText();
 			int v = Integer.parseInt(answer);
-			GamePlay.getInstance().answer = v;
-			System.out.println(GamePlay.getInstance().answer);
+			GamePlay.getInstance().setAnswer(v);
+			System.out.println(GamePlay.getInstance().getAnswer());
 			textBox.setText("");
 		}
 		@Override

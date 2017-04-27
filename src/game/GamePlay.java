@@ -31,8 +31,26 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	
 	private static MainDisplay md;
 	private static Introduction id;
-	public static Boolean start = false;
-	public int answer;
+	private static Boolean start = false;
+	
+	public static Boolean getStart() {
+		return start;
+	}
+
+	public static void setStart(Boolean start) {
+		GamePlay.start = start;
+	}
+	
+	private int answer;
+	
+	public void setAnswer(int answer) {
+		this.answer = answer;
+	}
+	
+	public int getAnswer() {
+		return answer;
+	}
+	
 	private static GamePlay theInstance = new GamePlay();
 	private int level;
 	private int score;
@@ -42,6 +60,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 	private int rightEdge;
 	private int blockPaneHeight;
 	
+
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
@@ -163,6 +182,7 @@ public class GamePlay extends JPanel{//Is JPanel going to go on this one?
 		}
 		
 	}
+
 }
 
 
