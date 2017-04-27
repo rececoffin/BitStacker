@@ -102,7 +102,7 @@ public class ControlPanel extends JPanel{
 			int v = Integer.parseInt(answer);
 			GamePlay.getInstance().answer = v;
 			System.out.println(GamePlay.getInstance().answer);
-			
+			textBox.setText("");
 		}
 		@Override
 		public void mouseReleased(MouseEvent e) {

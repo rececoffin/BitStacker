@@ -1,10 +1,10 @@
 package game;
 
-<<<<<<< HEAD
+
 import java.awt.Color;
-=======
+
 import java.awt.Graphics;
->>>>>>> 8e5b70a922a19ee74f6686db6d054e0a4e21f1ac
+
 import java.util.Random;
 
 public class Block {
