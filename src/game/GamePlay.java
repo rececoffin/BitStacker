@@ -71,9 +71,13 @@ public class GamePlay{
 	//private int rightEdge;
 	//private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
 	private int blockPaneHeight = 685;
+	private int blockPaneWidth = 500;
 	
 	public void setBlockPaneHeight(int nh){
 		blockPaneHeight = nh;
+	}
+	public void setBlockPaneWidth(int nh){
+		blockPaneWidth = nh;
 	}
 
 	public GamePlay() {
@@ -133,7 +137,7 @@ public class GamePlay{
 			//The guess was right
 			incrementScore();
 			//the fancy particle system
-			psm.addPS(new RowCorrectParticleSystem(250, currentBottomRowPosition()));
+			psm.addPS(new RowCorrectParticleSystem(currentBottomRowX(), currentBottomRowY()));
 			//Destroy the bottom row
 			lock.lock();//Lock is needed on this operation or it may interfere with other methods
 			try{
@@ -146,7 +150,18 @@ public class GamePlay{
 			
 		}
 	}
-	private int currentBottomRowPosition(){
+	//returns the center of the current bottom row horizontally
+	private int currentBottomRowX(){
+		int answer = 0;
+		lock.lock();
+		try{
+			answer = blockPaneWidth - blocks.getFirst().getRowWidth() / 2;
+		}finally{
+			lock.unlock();
+		}
+		return answer;
+	}
+	private int currentBottomRowY(){
 		int answer = 0;
 		lock.lock();
 		try{
