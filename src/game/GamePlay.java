@@ -76,7 +76,7 @@ public class GamePlay{
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
-		speed = 250;
+		speed = 100; //or 125
 		//blockPaneHeight = MiddlePanel.getInstance().getHeight();
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
