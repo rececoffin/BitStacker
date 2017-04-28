@@ -61,10 +61,7 @@ public class SidePanels extends JPanel{
 		}
 	}
 	public void setLevel(int level){
-		
 			levelValue.setText(Integer.toString(level));
-		
-		
 	}
 	public void setScore(int score){
 		scoreValue.setText(Integer.toString(score));

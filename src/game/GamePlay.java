@@ -14,6 +14,7 @@ import sun.applet.Main;
 import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gui.ControlPanel;
@@ -84,13 +85,8 @@ public class GamePlay{
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
-<<<<<<< HEAD
-		speed = 100; //or 125
-		//blockPaneHeight = MiddlePanel.getInstance().getHeight();
-=======
-		speed = 250;
+		speed = 100;
 		psm = new ParticleSystemManager();
->>>>>>> 2a0b7d0dc01c006ce72afe73c3a9e6a337e132eb
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
@@ -118,9 +114,27 @@ public class GamePlay{
 	
 	public void incrementScore(){
 		score++;
+		md.setScore(score);
 		if (score >= 8) {
 			level++;
+			md.setLevel(level);
+			//splash screen to tell them they moved on to the next level
+			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
+			String splashTitle = "Congratulations";
+			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
+			//Probably want a custom dialog instead, I was just doing this to have some sort of recognition that they beat the level
+			//We need a way to keep the game from continuing before the user can check anything
+			
+			//reset method to start a new level
+			reset();
 		}
+	}
+
+	private void reset() {
+		blocks.clear();
+		score = 0;
+		md.setScore(score);
+		addBlockRow();
 	}
 
 	public int getScore() {   
@@ -140,9 +154,9 @@ public class GamePlay{
 	public void submitButton(int submission){
 		if(checkGuess(submission)){
 			//The guess was right
-			incrementScore();
 			//the fancy particle system
 			psm.addPS(new RowCorrectParticleSystem(currentBottomRowX(), currentBottomRowY()));
+			incrementScore();
 			//Destroy the bottom row
 			lock.lock();//Lock is needed on this operation or it may interfere with other methods
 			try{
@@ -150,6 +164,7 @@ public class GamePlay{
 			}finally{
 				lock.unlock();
 			}
+
 		}else{
 			//The guess was wrong
 			
