@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -20,6 +22,7 @@ import javax.swing.JPanel;
 import gui.ControlPanel;
 import gui.Introduction;
 import gui.MiddlePanel;
+import gui.NextLevelDialog;
 import gui.ParticleSystemManager;
 import gui.RowCorrectParticleSystem;
 import gui.SidePanels;
@@ -69,6 +72,7 @@ public class GamePlay{
 	private ParticleSystemManager psm;
 	//Speed is in pixels per second
 	private double speed;
+	private int numBlocks;
 	//private int rightEdge;
 	//private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
 	private int blockPaneHeight = 685;
@@ -86,6 +90,7 @@ public class GamePlay{
 		level = 1;
 
 		speed = 100;
+		numBlocks = 3;
 		psm = new ParticleSystemManager();
 
 	}
@@ -116,26 +121,40 @@ public class GamePlay{
 	public void incrementScore(){
 		score++;
 		md.setScore(score);
-		if (score >= 8) {
+		if (score == 8) {
 			level++;
 			md.setLevel(level);
 			//splash screen to tell them they moved on to the next level
-			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
-			String splashTitle = "Congratulations";
-			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
-			//Probably want a custom dialog instead, I was just doing this to have some sort of recognition that they beat the level
-			//We need a way to keep the game from continuing before the user can check anything
-			
-			//reset method to start a new level
-			reset();
+//			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
+//			String splashTitle = "Congratulations";
+//			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
+			NextLevelDialog nl = new NextLevelDialog(level);
+			nl.setVisible(true);
 		}
 	}
+	
+	//these methods will be used to make the game harder after the user beats a level
+	public void increaseSpeed() {
+		speed += 50;
+		reset();
+	}
+	public void addBit(){
+		numBlocks++;
+		reset();
+	}
 
+	//reset the board, should have updated speed or bit
 	private void reset() {
-		blocks.clear();
+		//test that the methods are being called
+		System.out.println("NumBlocks: " + numBlocks);
+		System.out.println("Speed: " + speed);
+		////////////////////////////////////////////
 		score = 0;
 		md.setScore(score);
-		addBlockRow();
+		
+		//TODO:	Adding the bit works, but this leaves one block that doesn't update, I don't know how
+		//to remove it
+		//blocks.removeFirst();
 	}
 
 	public int getScore() {   
@@ -157,7 +176,7 @@ public class GamePlay{
 			//The guess was right
 			//the fancy particle system
 			psm.addPS(new RowCorrectParticleSystem(currentBottomRowX(), currentBottomRowY()));
-			incrementScore();
+			//incrementScore();
 			//Destroy the bottom row
 			lock.lock();//Lock is needed on this operation or it may interfere with other methods
 			try{
@@ -165,6 +184,8 @@ public class GamePlay{
 			}finally{
 				lock.unlock();
 			}
+			
+			incrementScore();
 
 		}else{
 			//The guess was wrong
@@ -196,6 +217,7 @@ public class GamePlay{
 		}
 		return answer;
 	}
+	//calls the check guess for the block row
 	public boolean checkGuess(int guess) {
 		System.out.println("checking " + guess);
 		boolean result = false;
@@ -286,12 +308,11 @@ public class GamePlay{
 	
 	//Add a new block - happens when the old one has reached the top of the stack of blocks
 	private void addBlockRow(){
-		BlockRow newRow = new BlockRow(3);//For now I'm using level for this
+		BlockRow newRow = new BlockRow(numBlocks);//For now I'm using level for this
 		blocks.addFirst(newRow);
 	}
-	//void initGame(){
-	//	
-	//}
+	
+
 	public static void main(String[] args) {
 		
 		md = MainDisplay.getFrameInstance();
@@ -299,13 +320,14 @@ public class GamePlay{
 		id = new Introduction();
 		id.setVisible(true);
 		//main will need to call update to move the block every frame like it's supposed to.
-		
 		while(true){
 			GamePlay.getInstance().update();
 		}
 		
 	}
 	//linked list methods that have been multithread proofed
+
+
 	
 }
 
