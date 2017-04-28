@@ -84,20 +84,10 @@ public class GamePlay{
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
-		score = 0;
-<<<<<<< HEAD
 
-		speed = 100; 
-		//or 125
-		//blockPaneHeight = MiddlePanel.getInstance().getHeight();
-
-		//speed = 250;
-		psm = new ParticleSystemManager();
-
-=======
 		speed = 100;
 		psm = new ParticleSystemManager();
->>>>>>> 9e05a307c832db761c8102a257fad90a9660c81b
+
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
