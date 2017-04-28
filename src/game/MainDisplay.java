@@ -13,6 +13,10 @@ import gui.SidePanels;
 public class MainDisplay extends JFrame{
 	public static final int MAIN_DISPLAY_HEIGHT = 850;
 	private static MainDisplay frameInstance = new MainDisplay();
+	MiddlePanel mp;
+	SidePanels left;
+	SidePanels right;
+	ControlPanel cp;
 	
 	public MainDisplay(){
 		
@@ -22,10 +26,10 @@ public class MainDisplay extends JFrame{
 		setTitle("Bit Stacker");
 		setBackground(new Color(3,3,54));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		MiddlePanel mp = MiddlePanel.getInstance();
-		SidePanels left = new SidePanels(true);
-		SidePanels right = new SidePanels(false);
-		ControlPanel cp = new ControlPanel();
+		mp = MiddlePanel.getInstance();
+		left = new SidePanels(true);
+		right = new SidePanels(false);
+		cp = new ControlPanel();
 		left.setLevel(1);
 		right.setScore(0);
 		FlowLayout flowLay = (FlowLayout) left.getLayout();
@@ -43,5 +47,13 @@ public class MainDisplay extends JFrame{
 	}
 	public static MainDisplay getFrameInstance() {
 		return frameInstance;
+	}
+	
+	public void setLevel(int level){
+		left.setLevel(level);
+	}
+	
+	public void setScore(int score){
+		right.setScore(score);
 	}
 }
