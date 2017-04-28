@@ -22,21 +22,22 @@ public class BlockRow {
 		return bitString;
 	}
 
+	public int getRowWidth(){
+		return (Block.width + Block.spacing) * numBits - Block.spacing;
+	}
+	
 	//calculate the value of the bits in a row
 	public int calcValue() {
 		int value = 0;
 		for(int i = 0; i < bitString.length; i++){
 			value += (bitString[i].getBit()) * (Math.pow(2, numBits - i - 1));
-		}
-		
+		}		
 		return value;
 	}
 
 	public void setString(Block[] bitString) {
 		this.bitString = bitString;
 	}
-
-	
 	
 	public void setValue(int bitValue) {
 		System.out.println("BlockRow.setValue(" + bitValue + ") should not be called in the actual game, just for testing.");
@@ -76,19 +77,4 @@ public class BlockRow {
 		return (double)(System.nanoTime() - t) / 1000000000.0;
 	}
 	
-//	public static void main(String [] args){
-//		BlockRow row = new BlockRow(2);
-//		row.setValue(4);
-//		
-//		row.setValue(0);
-//		System.out.println("Done with 0");
-//		
-//		row.setValue(3);
-//		
-//		row.setValue(2);
-//		
-//		row.setValue(1);
-//	}
-	
-
 }

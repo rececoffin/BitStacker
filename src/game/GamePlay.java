@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import gui.ControlPanel;
 import gui.Introduction;
 import gui.MiddlePanel;
+import gui.ParticleSystemManager;
+import gui.RowCorrectParticleSystem;
 import gui.SidePanels;
 
 
@@ -57,27 +59,38 @@ public class GamePlay{
 	public static GamePlay getInstance() {
 		return theInstance;
 	}
+	//Needed to prevent thread conflicts with the linked lists
 	ReentrantLock lock = new ReentrantLock();
 
 	private int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
+	private ParticleSystemManager psm;
 	//Speed is in pixels per second
 	private double speed;
 	//private int rightEdge;
 	//private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
 	private int blockPaneHeight = 685;
+	private int blockPaneWidth = 500;
 	
 	public void setBlockPaneHeight(int nh){
 		blockPaneHeight = nh;
+	}
+	public void setBlockPaneWidth(int nh){
+		blockPaneWidth = nh;
 	}
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
+<<<<<<< HEAD
 		speed = 100; //or 125
 		//blockPaneHeight = MiddlePanel.getInstance().getHeight();
+=======
+		speed = 250;
+		psm = new ParticleSystemManager();
+>>>>>>> 2a0b7d0dc01c006ce72afe73c3a9e6a337e132eb
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
@@ -127,16 +140,46 @@ public class GamePlay{
 	public void submitButton(int submission){
 		if(checkGuess(submission)){
 			//The guess was right
-			//Destroy the bottom row
-			blocks.removeLast();
 			incrementScore();
-
+			//the fancy particle system
+			psm.addPS(new RowCorrectParticleSystem(currentBottomRowX(), currentBottomRowY()));
+			//Destroy the bottom row
+			lock.lock();//Lock is needed on this operation or it may interfere with other methods
+			try{
+				blocks.removeLast();
+			}finally{
+				lock.unlock();
+			}
 		}else{
 			//The guess was wrong
 			
 		}
 	}
-	
+	//returns the center of the current bottom row horizontally
+	private int currentBottomRowX(){
+		int answer = 0;
+		lock.lock();
+		try{
+			answer = blockPaneWidth - blocks.getFirst().getRowWidth() / 2;
+		}finally{
+			lock.unlock();
+		}
+		return answer;
+	}
+	private int currentBottomRowY(){
+		int answer = 0;
+		lock.lock();
+		try{
+			if(blocks.size() > 2){
+				answer = blockPaneHeight - (Block.height + Block.spacing) / 2;
+			}else{
+				answer = getFloatingBlockPosition() + (Block.height + Block.spacing) / 2;
+			}
+		}finally{
+			lock.unlock();
+		}
+		return answer;
+	}
 	public boolean checkGuess(int guess) {
 		System.out.println("checking " + guess);
 		boolean result = false;
@@ -156,15 +199,21 @@ public class GamePlay{
 	public void drawGame(Graphics g) {
 		int counter = 1;
 		int rightEdge = MiddlePanel.getInstance().getWidth();
-		for (BlockRow b : blocks) {
-			if (blocks.getFirst() == b) {
-				b.draw(g, rightEdge, getFloatingBlockPosition());
+		lock.lock();
+		try{
+			for (BlockRow b : blocks) {
+				if (blocks.getFirst() == b) {
+					b.draw(g, rightEdge, getFloatingBlockPosition());
+				}
+				else {
+					b.draw(g, rightEdge, blockPaneHeight - ((blocks.size() - counter) * (Block.height + Block.spacing)));
+					counter++;
+				}
 			}
-			else {
-				b.draw(g, rightEdge, blockPaneHeight - ((blocks.size() - counter) * (Block.height + Block.spacing)));
-				counter++;
-			}
+		}finally{
+			lock.unlock();
 		}
+		psm.draw(g);
 	}
 	
 	//Updates the game - a new frame
@@ -189,7 +238,7 @@ public class GamePlay{
 		}finally{
 			lock.unlock();
 		}
-		//May have been wrong about needing this because paintComponent might be doing the same thing.
+		
 		MiddlePanel.getInstance().requestRepaint();
 	}
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
@@ -205,9 +254,13 @@ public class GamePlay{
 	int getFloatingBlockPosition(){
 		//Move the first block in the linked list's position down.
 		//Speed is in pixels per second
-		
-		double pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
-		//int rowsOnStack = blocks.size() - 1;//-1 because the moving row is not on the stack
+		double pixelsTraveled = 0.0;
+		//lock.lock();
+		//try{
+			pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
+		//}finally{
+		//	lock.unlock();
+		//}
 		return (int)pixelsTraveled;
 	}
 	
@@ -236,7 +289,8 @@ public class GamePlay{
 		}
 		
 	}
-
+	//linked list methods that have been multithread proofed
+	
 }
 
 

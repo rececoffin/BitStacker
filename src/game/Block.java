@@ -7,6 +7,8 @@ import java.awt.Graphics;
 
 import java.util.Random;
 
+import gui.ColorGenerator;
+
 public class Block {
 	private int bit;
 
@@ -14,7 +16,7 @@ public class Block {
 
 	public static final int width = 45;
 	public static final int height = 45;
-	public static final int spacing = 3;
+	public static final int spacing = 2;
 	public Block() {
 		generateRandomBit();
 		setRandomColor();
@@ -34,46 +36,7 @@ public class Block {
 		this.bit = b;
 	}
 	public void setRandomColor(){
-		Random r = new Random();
-		int n = r.nextInt(7);
-		switch (n){
-		//cat approved colors if you need one, the black background color is (3,3,54)
-		case 0: 
-			//purple
-			blockColor = new Color(153,0,255);
-			break;
-		case 1: 
-			//pink
-			blockColor = new Color(255,3,214);
-			break;
-		case 2: 
-			//cyan
-			blockColor = new Color(0,255,255);
-			break;
-		case 3: 
-			//blue cyan weirdness
-			blockColor = new Color(0,255,188);
-			break;
-		case 4: 
-			//orange
-			blockColor = new Color(255,162,0);
-			break;
-		case 5: 
-			//another blue
-			blockColor = new Color(0,145,255);
-			break;
-		case 6: 
-			//green
-			blockColor = new Color(0,255,85);
-			break;
-//		case 7: 
-//			//
-//			blockColor = new Color(0,0,0);
-//			break;
-		default: 
-			//just in case
-			blockColor = Color.WHITE;
-		}
+		blockColor = ColorGenerator.getRandomColor();
 	}
 	public Color getBlockColor() {
 		return blockColor;
