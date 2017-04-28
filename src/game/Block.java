@@ -2,7 +2,7 @@ package game;
 
 
 import java.awt.Color;
-
+import java.awt.Font;
 import java.awt.Graphics;
 
 import java.util.Random;
@@ -47,7 +47,8 @@ public class Block {
 		//g.fillRect(x, y, Block.width, Block.height);
 		g.setColor(blockColor);
 		g.fillRect(x, y, Block.width, Block.height);
-		g.setColor(Color.black);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Impact", Font.PLAIN, 20));
 		g.drawString(Integer.toString(bit), x + (Block.width/2), y + (Block.height/2));
 	}
 }
