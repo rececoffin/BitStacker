@@ -12,11 +12,11 @@ public class Block {
 
 	public Color blockColor;
 
-	public static final int width = 30;
-	public static final int height = 30;
-	public static final int spacing = 2;
+	public static final int width = 45;
+	public static final int height = 45;
+	public static final int spacing = 3;
 	public Block() {
-		bit = 0;
+		generateRandomBit();
 		setRandomColor();
 	}
 
@@ -26,10 +26,6 @@ public class Block {
 		Random rand = new Random();
 		bit = rand.nextInt(2);
 	}
-
-	
-	
-	
 	public int getBit() {
 		return bit;
 	}
@@ -84,8 +80,11 @@ public class Block {
 	}
 
 	public void draw(Graphics g, int x, int y) {
-		System.out.println("drawing a block at " + x + ", " + y );
+		//System.out.println("drawing a block at " + x + ", " + y );
+		//g.fillRect(x, y, Block.width, Block.height);
+		g.setColor(blockColor);
 		g.fillRect(x, y, Block.width, Block.height);
+		g.setColor(Color.black);
 		g.drawString(Integer.toString(bit), x + (Block.width/2), y + (Block.height/2));
 	}
 }

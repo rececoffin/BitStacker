@@ -20,12 +20,13 @@ public class MiddlePanel extends JPanel{
 		//mess with this
 		setPreferredSize(getSize());
 		setVisible(true);
+		//GamePlay.getInstance().setBlockPaneHeight(getHeight());
 	}
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		System.out.println("paint component");
-
+		//System.out.println("paint component");
+		GamePlay.getInstance().setBlockPaneHeight(getHeight());
 		GamePlay.getInstance().drawGame(g);
 	}
 	public void requestRepaint(){

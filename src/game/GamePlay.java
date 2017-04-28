@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridBagLayout;
 import java.util.LinkedList;
+import java.util.concurrent.locks.ReentrantLock;
 
 import sun.applet.Main;
 
@@ -56,21 +57,27 @@ public class GamePlay{
 	public static GamePlay getInstance() {
 		return theInstance;
 	}
-	
+	ReentrantLock lock = new ReentrantLock();
+
 	private int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
 	//Speed is in pixels per second
 	private double speed;
-	private int rightEdge;
-	private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
+	//private int rightEdge;
+	//private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
+	private int blockPaneHeight = 685;
 	
+	public void setBlockPaneHeight(int nh){
+		blockPaneHeight = nh;
+	}
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
-		speed = 200;
+		speed = 250;
+		//blockPaneHeight = MiddlePanel.getInstance().getHeight();
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
@@ -86,10 +93,14 @@ public class GamePlay{
 		if (level >= 10) {
 			return true;
 		}
-		else if (blocks.size() >= 10) {
-			return true;
-		}
+//		else if (blocks.size() >= 10) {
+//			return true;
+//		}
 		return false;
+	}
+	
+	private void endGame(){
+		System.exit(0);
 	}
 	
 	public void incrementScore(){
@@ -118,33 +129,39 @@ public class GamePlay{
 			//The guess was right
 			//Destroy the bottom row
 			blocks.removeLast();
+			incrementScore();
+
 		}else{
 			//The guess was wrong
+			
 		}
-		MiddlePanel.getInstance().requestRepaint();
-
 	}
 	
 	public boolean checkGuess(int guess) {
 		System.out.println("checking " + guess);
-		if (blocks.getFirst().checkGuess(guess)) {
-			blocks.removeFirst();
-			incrementScore();
-			return true;
+		boolean result = false;
+		lock.lock();
+		try{
+			if (blocks.getLast().checkGuess(guess)) {
+				result = true;
+			}
 		}
-		return false;
+		finally{
+			lock.unlock();
+		}
+		return result;
 	}
 	
 	
 	public void drawGame(Graphics g) {
-		int counter = 0;
-		rightEdge = MiddlePanel.getInstance().getX() + MiddlePanel.getInstance().getWidth();
+		int counter = 1;
+		int rightEdge = MiddlePanel.getInstance().getWidth();
 		for (BlockRow b : blocks) {
-			if (blocks.getLast() == b) {
+			if (blocks.getFirst() == b) {
 				b.draw(g, rightEdge, getFloatingBlockPosition());
 			}
 			else {
-				b.draw(g, rightEdge, blockPaneHeight - (counter * (Block.height + Block.spacing)));
+				b.draw(g, rightEdge, blockPaneHeight - ((blocks.size() - counter) * (Block.height + Block.spacing)));
 				counter++;
 			}
 		}
@@ -152,11 +169,25 @@ public class GamePlay{
 	
 	//Updates the game - a new frame
 	void update(){
+		if(MiddlePanel.getInstance() != null){
+			//blockPaneHeight = 10;
+			MiddlePanel.getInstance();
+		}
 		//System.out.println("Update");
 		//This is where the game checks if the row has gotten to the point where it needs
-		///ystem.out.println("number of blocks = " + blocks.size());
-		if(blocks.size() == 0 || timeForNewBlockRow()){
-			addBlockRow();
+		lock.lock();
+		try{
+			if(blocks.size() == 0 || timeForNewBlockRow()){
+				if(checkBlockStackFull()){
+					//meaning there's no more room for the next block so the player loses
+					endGame();
+				}else{
+					//If the game's not over add a new block row
+					addBlockRow();
+				}
+			}
+		}finally{
+			lock.unlock();
 		}
 		//May have been wrong about needing this because paintComponent might be doing the same thing.
 		MiddlePanel.getInstance().requestRepaint();
@@ -180,9 +211,13 @@ public class GamePlay{
 		return (int)pixelsTraveled;
 	}
 	
+	private boolean checkBlockStackFull(){
+		return blocks.size() * (Block.spacing + Block.height) > blockPaneHeight;
+	}
+	
 	//Add a new block - happens when the old one has reached the top of the stack of blocks
 	private void addBlockRow(){
-		BlockRow newRow = new BlockRow(level);//For now I'm using level for this
+		BlockRow newRow = new BlockRow(3);//For now I'm using level for this
 		blocks.addFirst(newRow);
 	}
 	//void initGame(){
@@ -195,11 +230,9 @@ public class GamePlay{
 		id = new Introduction();
 		id.setVisible(true);
 		//main will need to call update to move the block every frame like it's supposed to.
+		
 		while(true){
 			GamePlay.getInstance().update();
-			//if(i > 10000){
-			//	break;
-			//}
 		}
 		
 	}
