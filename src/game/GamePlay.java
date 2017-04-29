@@ -129,6 +129,7 @@ public class GamePlay{
 //			String splashTitle = "Congratulations";
 //			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
 			NextLevelDialog nl = new NextLevelDialog(level);
+			nl.setLocationRelativeTo(null);
 			nl.setVisible(true);
 		}
 	}
@@ -316,10 +317,12 @@ public class GamePlay{
 	public static void main(String[] args) {
 		
 		md = MainDisplay.getFrameInstance();
-		
+		md.setLocationRelativeTo(null);
 		
 		id = new Introduction();
+		id.setLocationRelativeTo(null);
 		id.setVisible(true);
+		
 		
 		//main will need to call update to move the block every frame like it's supposed to.
 		while(true){
