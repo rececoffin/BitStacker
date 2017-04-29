@@ -3,8 +3,11 @@ package game;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
+
+import com.sun.glass.events.WindowEvent;
 
 import gui.ControlPanel;
 import gui.MiddlePanel;
@@ -42,6 +45,11 @@ public class MainDisplay extends JFrame{
 		
 		this.add(cp, BorderLayout.SOUTH);
 		this.add(mp, BorderLayout.CENTER);
+//		this.addWindowListener(new WindowAdapter(){
+//			public void windowOpened( WindowEvent e){
+//				cp.textBox.requestFocus();
+//			}
+//		});
 		setVisible(false);
 
 	}

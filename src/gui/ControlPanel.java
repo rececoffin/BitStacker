@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -22,8 +23,9 @@ import game.GamePlay;
 import game.MainDisplay;
 
 public class ControlPanel extends JPanel{
-	JTextField textBox;
+	public JTextField textBox;
 	int intAnswer;
+
 	public static final int CONTROL_PANEL_HEIGHT = 100;
 	public static final int GAME_PANEL_HEIGHT = MainDisplay.MAIN_DISPLAY_HEIGHT - CONTROL_PANEL_HEIGHT;
 
@@ -75,6 +77,7 @@ public class ControlPanel extends JPanel{
 		textBox.setPreferredSize( new Dimension( 300, 40 ) );
 		textBox.setFont(new Font("Impact", Font.PLAIN, 20));
 		textBox.addKeyListener(new EnterListener());
+	
 		p.add(textBox);
 		p.setBackground(new Color(255,3,214));
 		

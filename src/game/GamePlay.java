@@ -316,9 +316,11 @@ public class GamePlay{
 	public static void main(String[] args) {
 		
 		md = MainDisplay.getFrameInstance();
-			
+		
+		
 		id = new Introduction();
 		id.setVisible(true);
+		
 		//main will need to call update to move the block every frame like it's supposed to.
 		while(true){
 			GamePlay.getInstance().update();
