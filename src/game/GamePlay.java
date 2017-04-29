@@ -226,7 +226,7 @@ public class GamePlay{
 		int answer = 0;
 		lock.lock();
 		try{
-			if(blocks.size() > 2){
+			if(blocks.size() > 1){
 				answer = blockPaneHeight - (Block.height + Block.spacing) / 2;
 			}else{
 				answer = getFloatingBlockPosition() + (Block.height + Block.spacing) / 2;
