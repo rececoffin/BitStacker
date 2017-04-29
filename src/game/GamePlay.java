@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import gui.ControlPanel;
+import gui.GameOver;
 import gui.Introduction;
 import gui.MiddlePanel;
 import gui.NextLevelDialog;
@@ -39,7 +40,8 @@ public class GamePlay{
 	private static MainDisplay md;
 	private static Introduction id;
 	private static Boolean start = false;
-	
+	private static Boolean gameStatus = true;
+	public static Boolean win = false;
 	public static Boolean getStart() {
 		return start;
 	}
@@ -120,18 +122,32 @@ public class GamePlay{
 	
 	public void incrementScore(){
 		score++;
+		
 		md.setScore(score);
 		if (score == 8) {
 			level++;
 			md.setLevel(level);
+			
+			
 			//splash screen to tell them they moved on to the next level
 //			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
 //			String splashTitle = "Congratulations";
 //			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
-			NextLevelDialog nl = new NextLevelDialog(level);
-			nl.setLocationRelativeTo(null);
-			nl.setVisible(true);
+			if(level <= 10){
+				NextLevelDialog nl = new NextLevelDialog(level);
+				nl.setLocationRelativeTo(null);
+				nl.setVisible(true);
+			}
+//			else{
+//				gameStatus = false;
+//				win = true;
+//			}
 		}
+		
+			
+		
+		
+		
 	}
 	
 	//these methods will be used to make the game harder after the user beats a level
@@ -261,6 +277,7 @@ public class GamePlay{
 			//blockPaneHeight = 10;
 			MiddlePanel.getInstance();
 		}
+		
 		//System.out.println("Update");
 		//This is where the game checks if the row has gotten to the point where it needs
 		lock.lock();
@@ -268,9 +285,15 @@ public class GamePlay{
 			if(blocks.size() == 0 || timeForNewBlockRow()){
 				if(checkBlockStackFull()){
 					//meaning there's no more room for the next block so the player loses
-					endGame();
+					gameStatus = false;
+					//endGame();
+					
 				}else{
 					//If the game's not over add a new block row
+					if (level > 10){
+						win = true;
+						gameStatus = false;
+					}
 					addBlockRow();
 				}
 			}
@@ -279,6 +302,7 @@ public class GamePlay{
 		}
 		
 		MiddlePanel.getInstance().requestRepaint();
+		
 	}
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
@@ -325,9 +349,20 @@ public class GamePlay{
 		
 		
 		//main will need to call update to move the block every frame like it's supposed to.
-		while(true){
+		while(gameStatus){
 			GamePlay.getInstance().update();
 		}
+	
+			if(!win){
+				GameOver screen = new GameOver(false);
+				screen.setVisible(true);
+				screen.setLocationRelativeTo(null);
+			}
+			else{
+				GameOver screen2 = new GameOver(true);
+				screen2.setVisible(true);
+				screen2.setLocationRelativeTo(null);
+			}
 		
 	}
 	//linked list methods that have been multithread proofed
