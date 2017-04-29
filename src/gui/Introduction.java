@@ -196,6 +196,7 @@ public class Introduction extends JDialog{
 		public void actionPerformed(ActionEvent e) {
 			//bigFrame.setVisible(false);
 			dispose();
+			main.setGameBegin(true);
 			main.setVisible(true);
 		}
 

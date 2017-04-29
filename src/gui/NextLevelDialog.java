@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import game.GamePlay;
+import game.MainDisplay;
 
 public class NextLevelDialog extends JDialog{
 	private int level;
@@ -101,6 +102,7 @@ public class NextLevelDialog extends JDialog{
 				dispose();
 				GamePlay.getInstance().addBit();
 			}
+			MainDisplay.getFrameInstance().setIsNewLevel(false);
 		}
 		
 	}

@@ -133,6 +133,7 @@ public class GamePlay{
 //			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
 //			String splashTitle = "Congratulations";
 //			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
+
 			if(level <= 10){
 				NextLevelDialog nl = new NextLevelDialog(level);
 				nl.setLocationRelativeTo(null);
@@ -142,6 +143,7 @@ public class GamePlay{
 //				gameStatus = false;
 //				win = true;
 //			}
+
 		}
 		
 			
@@ -346,11 +348,16 @@ public class GamePlay{
 		id = new Introduction();
 		id.setLocationRelativeTo(null);
 		id.setVisible(true);
-		
-		
+		//Loops until the play button is pressed so the game doesn't begin
+		while(!md.gameBegin()) {}
 		//main will need to call update to move the block every frame like it's supposed to.
+
 		while(gameStatus){
-			GamePlay.getInstance().update();
+			
+			if (!md.isNewLevel()) {
+				GamePlay.getInstance().update();
+			}
+
 		}
 	
 			if(!win){
@@ -367,9 +374,8 @@ public class GamePlay{
 	}
 	//linked list methods that have been multithread proofed
 
-
-	
 }
+
 
 
 
