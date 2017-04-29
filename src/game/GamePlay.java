@@ -131,6 +131,7 @@ public class GamePlay{
 			NextLevelDialog nl = new NextLevelDialog(level);
 			nl.setLocationRelativeTo(null);
 			nl.setVisible(true);
+			md.setIsNewLevel(true);
 		}
 	}
 	
@@ -322,11 +323,14 @@ public class GamePlay{
 		id = new Introduction();
 		id.setLocationRelativeTo(null);
 		id.setVisible(true);
-		
-		
+		//Loops until the play button is pressed so the game doesn't begin
+		while(!md.gameBegin()) {}
 		//main will need to call update to move the block every frame like it's supposed to.
 		while(true){
-			GamePlay.getInstance().update();
+			// Pauses the update function while the new level dialogue is up
+			if (!md.isNewLevel()) {
+				GamePlay.getInstance().update();
+			}
 		}
 		
 	}

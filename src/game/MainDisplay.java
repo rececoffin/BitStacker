@@ -20,6 +20,8 @@ public class MainDisplay extends JFrame{
 	SidePanels left;
 	SidePanels right;
 	ControlPanel cp;
+	private boolean gameBegin;
+	private boolean newLevel;
 	
 	public MainDisplay(){
 		
@@ -35,6 +37,8 @@ public class MainDisplay extends JFrame{
 		cp = new ControlPanel();
 		left.setLevel(1);
 		right.setScore(0);
+		gameBegin = false;
+		newLevel = false;
 		FlowLayout flowLay = (FlowLayout) left.getLayout();
 		flowLay.setAlignment(FlowLayout.LEFT);
 		this.add(left, BorderLayout.WEST);
@@ -63,5 +67,19 @@ public class MainDisplay extends JFrame{
 	
 	public void setScore(int score){
 		right.setScore(score);
+	}
+	public boolean gameBegin() {
+		return gameBegin;
+	}
+	public void setGameBegin(boolean b) {
+		gameBegin = b;
+		return;
+	}
+	public boolean isNewLevel() {
+		return newLevel;
+	}
+	public void setIsNewLevel(boolean b) {
+		newLevel = b;
+		return;
 	}
 }
