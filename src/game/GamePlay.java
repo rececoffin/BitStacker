@@ -39,9 +39,11 @@ public class GamePlay{
 
 	private static MainDisplay md;
 	private static Introduction id;
+	private static GameOver end;
 	private static Boolean start = false;
 	private static Boolean gameStatus = true;
-	public static Boolean win = false;
+	public Boolean win = false;
+	
 	public static Boolean getStart() {
 		return start;
 	}
@@ -68,7 +70,7 @@ public class GamePlay{
 	//Needed to prevent thread conflicts with the linked lists
 	ReentrantLock lock = new ReentrantLock();
 
-	private static int level;
+	private int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
 	private ParticleSystemManager psm;
@@ -89,7 +91,7 @@ public class GamePlay{
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
-		level = 10;
+		level = 1;
 		score = 0;
 
 		speed = 100;
@@ -326,7 +328,10 @@ public class GamePlay{
 		blocks.addFirst(newRow);
 	}
 
-
+private static void endLogic(){
+	
+	
+}
 	public static void main(String[] args) {
 
 		md = MainDisplay.getFrameInstance();
@@ -343,27 +348,18 @@ public class GamePlay{
 		//System.out.println(md.gameBegin());
 		while(gameStatus){
 
-			if (!md.isNewLevel()) {
+			if (!md.isNewLevel() && gameStatus) {
 				GamePlay.getInstance().update();
+			}
+			else{
+				break;
 			}
 
 		}
-System.out.println(level);
-		if(!win){
-			GameOver screen = new GameOver(false);
-			screen.setVisible(true);
-			screen.setLocationRelativeTo(null);
-		}
-		else{
-			GameOver screen2 = new GameOver(true);
-			screen2.setVisible(true);
-			screen2.setLocationRelativeTo(null);
-		}
-		if (level == 10){
-			GameOver screen2 = new GameOver(true);
-			screen2.setVisible(true);
-			screen2.setLocationRelativeTo(null);
-		}
+		System.out.println("HELP");
+		end = new GameOver();
+		end.setVisible(true);
+		end.setLocationRelativeTo(null);
 
 	}
 

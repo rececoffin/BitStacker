@@ -17,13 +17,13 @@ import gui.NextLevelDialog.ButtonListener;
 public class GameOver extends JDialog{
 	private static JButton exit;
 	Font myFont = new Font("Impact", Font.PLAIN, 25);
-public GameOver(boolean win) {
+public GameOver() {
 	//Cat I need you to make this all pretty
 		JPanel panel;
 		setBackground(new Color(3,3,54));
 		setSize(500, 300);
 		setLayout(new GridLayout(2,0));
-			if (win){
+			if (GamePlay.getInstance().getLevel() == 11){
 				panel = addWinPanel();
 			}
 			else{
@@ -42,6 +42,7 @@ public GameOver(boolean win) {
 			
 			
 }
+
 
 private JPanel addLosePanel() {
 	JPanel panel = new JPanel();
