@@ -75,7 +75,7 @@ public class MainDisplay extends JFrame{
 		gameBegin = b;
 		return;
 	}
-	public boolean isNewLevel() {
+	public boolean isNewLevel() {		
 		return newLevel;
 	}
 	public void setIsNewLevel(boolean b) {

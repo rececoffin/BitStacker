@@ -127,7 +127,7 @@ public class GamePlay{
 		if (score == 8) {
 			level++;
 			md.setLevel(level);
-			
+			md.setIsNewLevel(true);
 			
 			//splash screen to tell them they moved on to the next level
 //			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
@@ -349,9 +349,11 @@ public class GamePlay{
 		id.setLocationRelativeTo(null);
 		id.setVisible(true);
 		//Loops until the play button is pressed so the game doesn't begin
-		while(!md.gameBegin()) {}
+		while(!md.gameBegin()) {
+			System.out.println("Need this to run");
+		}
 		//main will need to call update to move the block every frame like it's supposed to.
-
+		//System.out.println(md.gameBegin());
 		while(gameStatus){
 			
 			if (!md.isNewLevel()) {
