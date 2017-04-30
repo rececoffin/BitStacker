@@ -36,7 +36,7 @@ import java.awt.Graphics;
 
 
 public class GamePlay{
-	
+
 	private static MainDisplay md;
 	private static Introduction id;
 	private static Boolean start = false;
@@ -49,19 +49,19 @@ public class GamePlay{
 	public static void setStart(Boolean start) {
 		GamePlay.start = start;
 	}
-	
+
 	private int answer;
-	
+
 	public void setAnswer(int answer) {
 		this.answer = answer;
 	}
-	
+
 	public int getAnswer() {
 		return answer;
 	}
-	
+
 	private static GamePlay theInstance = new GamePlay();
-	
+
 	public static GamePlay getInstance() {
 		return theInstance;
 	}
@@ -79,7 +79,7 @@ public class GamePlay{
 	//private int blockPaneHeight = ControlPanel.GAME_PANEL_HEIGHT;
 	private int blockPaneHeight = 685;
 	private int blockPaneWidth = 500;
-	
+
 	public void setBlockPaneHeight(int nh){
 		blockPaneHeight = nh;
 	}
@@ -90,6 +90,7 @@ public class GamePlay{
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
+		score = 0;
 
 		speed = 100;
 		numBlocks = 3;
@@ -98,7 +99,7 @@ public class GamePlay{
 	}
 	public void setList(LinkedList<BlockRow> blocks) {
 		this.blocks = blocks;
-		
+
 	}
 
 	public LinkedList<BlockRow> getBlocks() {
@@ -110,24 +111,26 @@ public class GamePlay{
 		if (level >= 10) {
 			return true;
 		}
+		if(blocks.size() == 10) return true;
+		
 		return false;
 	}
-	
+
 	//Not used???
 	private void endGame(){
 		System.exit(0);
 	}
-	
+
 	//adds to the score, handles the next level dialog
 	public void incrementScore(){
 		score++;
-		
+
 		md.setScore(score);
-		if (score == 8) {
+		if (score == 1) {
 			level++;
 			md.setLevel(level);
 			md.setIsNewLevel(true);
-			
+
 
 			if(level <= 10){
 				NextLevelDialog nl = new NextLevelDialog(level);
@@ -136,13 +139,8 @@ public class GamePlay{
 			}
 
 		}
-		
-			
-		
-		
-		
 	}
-	
+
 	//these methods will be used to make the game harder after the user beats a level
 	public void increaseSpeed() {
 		speed += 50;
@@ -166,7 +164,7 @@ public class GamePlay{
 
 	public void setScore(int i) {
 		this.score = i;
-		
+
 	}
 
 	public int  getLevel() {
@@ -187,12 +185,12 @@ public class GamePlay{
 			}finally{
 				lock.unlock();
 			}
-			
+
 			incrementScore();
 
 		}else{
 			//The guess was wrong
-			
+
 		}
 	}
 	//returns the center of the current bottom row horizontally
@@ -235,8 +233,8 @@ public class GamePlay{
 		}
 		return result;
 	}
-	
-	
+
+
 	//draws the blocks everytime update is called
 	public void drawGame(Graphics g) {
 		int counter = 1;
@@ -257,14 +255,14 @@ public class GamePlay{
 		}
 		psm.draw(g);
 	}
-	
+
 	//Updates the game - a new frame
 	void update(){
 		if(MiddlePanel.getInstance() != null){
 			//blockPaneHeight = 10;
 			MiddlePanel.getInstance();
 		}
-		
+
 		//System.out.println("Update");
 		//This is where the game checks if the row has gotten to the point where it needs
 		lock.lock();
@@ -274,10 +272,12 @@ public class GamePlay{
 					//meaning there's no more room for the next block so the player loses
 					gameStatus = false;
 					//endGame();
-					
+
 				}else{
 					//If the game's not over add a new block row
-					if (level > 10){
+					//TODO: I have no idea why this only work with (level >= 10) 
+					//and when line 135 has (level <= 10)
+					if (level >= 10){
 						win = true;
 						gameStatus = false;
 					}
@@ -287,11 +287,11 @@ public class GamePlay{
 		}finally{
 			lock.unlock();
 		}
-		
+
 		MiddlePanel.getInstance().requestRepaint();
-		
+
 	}
-	
+
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
@@ -301,36 +301,36 @@ public class GamePlay{
 		return currentPosition > target;
 
 	}
-	
+
 	int getFloatingBlockPosition(){
 		//Move the first block in the linked list's position down.
 		//Speed is in pixels per second
 		double pixelsTraveled = 0.0;
 		//lock.lock();
 		//try{
-			pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
+		pixelsTraveled = (int)(speed * blocks.getFirst().getElapsedTimeSeconds());
 		//}finally{
 		//	lock.unlock();
 		//}
 		return (int)pixelsTraveled;
 	}
-	
+
 	private boolean checkBlockStackFull(){
 		return blocks.size() * (Block.spacing + Block.height) > blockPaneHeight;
 	}
-	
+
 	//Add a new block - happens when the old one has reached the top of the stack of blocks
 	private void addBlockRow(){
 		BlockRow newRow = new BlockRow(numBlocks);//For now I'm using level for this
 		blocks.addFirst(newRow);
 	}
-	
+
 
 	public static void main(String[] args) {
-		
+
 		md = MainDisplay.getFrameInstance();
 		md.setLocationRelativeTo(null);
-		
+
 		id = new Introduction();
 		id.setLocationRelativeTo(null);
 		id.setVisible(true);
@@ -341,25 +341,24 @@ public class GamePlay{
 		//main will need to call update to move the block every frame like it's supposed to.
 		//System.out.println(md.gameBegin());
 		while(gameStatus){
-			
+
 			if (!md.isNewLevel()) {
 				GamePlay.getInstance().update();
 			}
 
 		}
-	
-			if(!win){
-				GameOver screen = new GameOver(false);
-				screen.setVisible(true);
-				screen.setLocationRelativeTo(null);
-			}
-			else{
-				GameOver screen2 = new GameOver(true);
-				screen2.setVisible(true);
-				screen2.setLocationRelativeTo(null);
-			}
-		
+
+		if(!win){
+			GameOver screen = new GameOver(false);
+			screen.setVisible(true);
+			screen.setLocationRelativeTo(null);
+		}
+		else{
+			GameOver screen2 = new GameOver(true);
+			screen2.setVisible(true);
+			screen2.setLocationRelativeTo(null);
+		}
+
 	}
-	//linked list methods that have been multithread proofed
 
 }

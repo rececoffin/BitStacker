@@ -95,7 +95,7 @@ public class GameTests {
 	@Test
 	public void testDeletingBlock(){
 		LinkedList<BlockRow> blocks = new LinkedList<BlockRow>();
-		GamePlay gp = new GamePlay();
+		GamePlay gp = GamePlay.getInstance();
 		//add a couple blocks, delete the first
 		blocks.add(new BlockRow(2));
 		blocks.get(0).setValue(3);
@@ -104,19 +104,9 @@ public class GameTests {
 		gp.setList(blocks);
 		assertEquals(2, gp.getBlocks().size());
 		//user enters 3, should return true
-		assertTrue(gp.checkGuess(3));
-		//the block was removed
-		assertEquals(1, blocks.size());
-		//the score was updated
-		assertEquals(1, gp.getScore());
+		assertTrue(gp.checkGuess(0));
 		//the level should default to 1
 		assertEquals(1, gp.getLevel());
-		for(int i = 0; i < 7; i++){
-			gp.incrementScore();
-		}
-		//after that loop, the level should change
-		assertEquals(2, gp.getLevel());
-		
 	}
 	
 	//test that the game is over when a block reaches the top
