@@ -181,7 +181,7 @@ public class GamePlay{
 			psm.addPS(new RowCorrectParticleSystem(currentBottomRowX(), currentBottomRowY()));
 			//incrementScore();
 			//Destroy the bottom row
-			lock.lock();//Lock is needed on this operation or it may interfere with other methods
+			lock.lock();//Lock is needed on this operation or it may interfere with other threads
 			try{
 				blocks.removeLast();
 			}finally{
@@ -189,10 +189,10 @@ public class GamePlay{
 			}
 
 			incrementScore();
-
+			missedGuessCount = 0;
 		}else{
 			//The guess was wrong
-
+			missedGuessCount++;
 		}
 	}
 	//returns the center of the current bottom row horizontally
@@ -235,7 +235,11 @@ public class GamePlay{
 		}
 		return result;
 	}
-
+	private int missedGuessCount = 0;
+	private final int missedGuessesUntilDisplayBitValues = 2;
+	private boolean displayBitValues(){
+		return missedGuessCount >= missedGuessesUntilDisplayBitValues;
+	}
 
 	//draws the blocks everytime update is called
 	public void drawGame(Graphics g) {
@@ -245,10 +249,10 @@ public class GamePlay{
 		try{
 			for (BlockRow b : blocks) {
 				if (blocks.getFirst() == b) {
-					b.draw(g, rightEdge, getFloatingBlockPosition());
+					b.draw(g, rightEdge, getFloatingBlockPosition(), displayBitValues());
 				}
 				else {
-					b.draw(g, rightEdge, blockPaneHeight - ((blocks.size() - counter) * (Block.height + Block.spacing)));
+					b.draw(g, rightEdge, blockPaneHeight - ((blocks.size() - counter) * (Block.height + Block.spacing)), displayBitValues());
 					counter++;
 				}
 			}

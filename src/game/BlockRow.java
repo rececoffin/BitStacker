@@ -17,7 +17,7 @@ public class BlockRow {
 		bitString = new Block[this.numBits];
 		
 		for(int i = 0; i < numBits; i++){
-			bitString[i] = new Block();
+			bitString[i] = new Block(numBits - i - 1);
 		}
 	}
 
@@ -68,10 +68,10 @@ public class BlockRow {
 		return i == calcValue();
 	}
 	
-	public void draw(Graphics g, int rightEdge, int y) {
+	public void draw(Graphics g, int rightEdge, int y, boolean displayValues) {
 		//System.out.println("drawing a block row");
 		for (int i = 0; i < bitString.length; ++i) {
-			bitString[i].draw(g, rightEdge - ((Block.width + Block.spacing) * (numBits - i)), y);
+			bitString[i].draw(g, rightEdge - ((Block.width + Block.spacing) * (numBits - i)), y, displayValues);
 		}
 	}
 	

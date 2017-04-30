@@ -15,7 +15,7 @@ public class GameTests {
 	//test that the 3 bit strings are generating a random 1 or 0
 	@Test
 	public void testRandomBitValues(){
-		Block b1 = new Block();
+		Block b1 = new Block(0);
 		//check that 1's and 0's are 
 		int oneOccur = 0;
 		int zeroOccur = 0;

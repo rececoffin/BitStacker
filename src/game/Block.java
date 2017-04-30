@@ -17,7 +17,9 @@ public class Block {
 	public static final int width = 45;
 	public static final int height = 45;
 	public static final int spacing = 2;
-	public Block() {
+	private int position;
+	public Block(int position) {
+		this.position = position;
 		generateRandomBit();
 		setRandomColor();
 	}
@@ -41,14 +43,24 @@ public class Block {
 	public Color getBlockColor() {
 		return blockColor;
 	}
-
-	public void draw(Graphics g, int x, int y) {
+	private int bitValue(){
+		return (int)Math.pow(2,  position);
+	}
+	public void draw(Graphics g, int x, int y, boolean displayBitValue) {
 		//System.out.println("drawing a block at " + x + ", " + y );
 		//g.fillRect(x, y, Block.width, Block.height);
+		String stringToDisplay = Integer.toString(bit);
+		if(displayBitValue){
+			stringToDisplay += "(" + Integer.toString(bitValue()) + ")";
+		}
+		int horizontalTextPosition = x + (Block.width/2) - 3;
+		if(displayBitValue){
+			horizontalTextPosition = x + (Block.width/2) - 10;
+		}
 		g.setColor(blockColor);
 		g.fillRect(x, y, Block.width, Block.height);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Impact", Font.PLAIN, 20));
-		g.drawString(Integer.toString(bit), x + (Block.width/2), y + (Block.height/2));
+		g.drawString(stringToDisplay, horizontalTextPosition, y + (Block.height/2) + 7);
 	}
 }
