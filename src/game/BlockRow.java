@@ -6,6 +6,9 @@ public class BlockRow {
 	private Block[] bitString;
 	//private int bitValue;
 	private int numBits;
+	public int getNumBits() {
+		return numBits;
+	}
 	private long t;
 	
 	public BlockRow(int numBits) {

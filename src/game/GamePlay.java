@@ -110,16 +110,15 @@ public class GamePlay{
 		if (level >= 10) {
 			return true;
 		}
-//		else if (blocks.size() >= 10) {
-//			return true;
-//		}
 		return false;
 	}
 	
+	//Not used???
 	private void endGame(){
 		System.exit(0);
 	}
 	
+	//adds to the score, handles the next level dialog
 	public void incrementScore(){
 		score++;
 		
@@ -129,20 +128,12 @@ public class GamePlay{
 			md.setLevel(level);
 			md.setIsNewLevel(true);
 			
-			//splash screen to tell them they moved on to the next level
-//			String splashMessage1 = "You completed level: " + (level - 1) + "!"; 
-//			String splashTitle = "Congratulations";
-//			JOptionPane.showMessageDialog(null, splashMessage1, splashTitle, JOptionPane.INFORMATION_MESSAGE);
 
 			if(level <= 10){
 				NextLevelDialog nl = new NextLevelDialog(level);
 				nl.setLocationRelativeTo(null);
 				nl.setVisible(true);
 			}
-//			else{
-//				gameStatus = false;
-//				win = true;
-//			}
 
 		}
 		
@@ -163,19 +154,10 @@ public class GamePlay{
 	}
 
 	//reset the board, should have updated speed or bit
-	private void reset() {
-		//test that the methods are being called
-//		System.out.println("NumBlocks: " + numBlocks);
-//		System.out.println("Speed: " + speed);
-		////////////////////////////////////////////
+	public void reset() {
 		score = 0;
 		md.setScore(score);
-		
-		//TODO:	Adding the bit works, but this leaves one block that doesn't update, I don't know how
-		//to remove it	
-		//DONE
-		
-		blocks.removeFirst();
+		blocks.clear();
 	}
 
 	public int getScore() {   
@@ -255,6 +237,7 @@ public class GamePlay{
 	}
 	
 	
+	//draws the blocks everytime update is called
 	public void drawGame(Graphics g) {
 		int counter = 1;
 		int rightEdge = MiddlePanel.getInstance().getWidth();
@@ -308,6 +291,7 @@ public class GamePlay{
 		MiddlePanel.getInstance().requestRepaint();
 		
 	}
+	
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
 	boolean timeForNewBlockRow(){
 		int currentPosition = getFloatingBlockPosition();
@@ -379,26 +363,3 @@ public class GamePlay{
 	//linked list methods that have been multithread proofed
 
 }
-
-
-
-
-
-
-//
-//class IntroDisplay extends JDialog{
-//	public IntroDisplay(){
-//		//JFrame frame = this;
-//		setSize(1250, 850);
-//		//setLayout(new GridBagLayout());
-//		setTitle("Bit Stacker Intro");
-//		setBackground(new Color(3,3,54));
-//		
-//		Introduction intro = new Introduction();
-//	//	Introduction intro = new Introduction(frame);
-//		this.add(intro, BorderLayout.CENTER);
-//
-//
-//	}
-	
-//}

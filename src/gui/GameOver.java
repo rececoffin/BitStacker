@@ -42,6 +42,7 @@ public GameOver(boolean win) {
 			
 			
 }
+
 private JPanel addLosePanel() {
 	JPanel panel = new JPanel();
 	JLabel label = new JLabel("You lose!");
