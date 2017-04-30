@@ -170,7 +170,7 @@ public class Introduction extends JDialog{
 	}
 	private JPanel instructionPanel1(){
 		JPanel p = new JPanel();
-		JLabel box = new JLabel("To play, enter the value of the bit string (series of bits) into the text box and press enter!");
+		JLabel box = new JLabel("To play, enter the value of the bit string (series of bits) into the text box and press enter or submit!");
 		box.setForeground(new Color(178,102,255));
 		box.setFont(new Font("Impact", Font.PLAIN, 25));
 		p.add(box);
