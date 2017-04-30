@@ -68,7 +68,7 @@ public class GamePlay{
 	//Needed to prevent thread conflicts with the linked lists
 	ReentrantLock lock = new ReentrantLock();
 
-	private int level;
+	private static int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
 	private ParticleSystemManager psm;
@@ -89,7 +89,7 @@ public class GamePlay{
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
-		level = 1;
+		level = 10;
 		score = 0;
 
 		speed = 100;
@@ -126,7 +126,7 @@ public class GamePlay{
 		score++;
 
 		md.setScore(score);
-		if (score == 1) {
+		if (score == 8) {
 			level++;
 			md.setLevel(level);
 			md.setIsNewLevel(true);
@@ -277,7 +277,8 @@ public class GamePlay{
 					//If the game's not over add a new block row
 					//TODO: I have no idea why this only work with (level >= 10) 
 					//and when line 135 has (level <= 10)
-					if (level >= 10){
+					//because you don't want it do do those things when it is less than ten, only when it's greater.
+					if (level > 10){
 						win = true;
 						gameStatus = false;
 					}
@@ -347,13 +348,18 @@ public class GamePlay{
 			}
 
 		}
-
+System.out.println(level);
 		if(!win){
 			GameOver screen = new GameOver(false);
 			screen.setVisible(true);
 			screen.setLocationRelativeTo(null);
 		}
 		else{
+			GameOver screen2 = new GameOver(true);
+			screen2.setVisible(true);
+			screen2.setLocationRelativeTo(null);
+		}
+		if (level == 10){
 			GameOver screen2 = new GameOver(true);
 			screen2.setVisible(true);
 			screen2.setLocationRelativeTo(null);
