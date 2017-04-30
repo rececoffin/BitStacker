@@ -165,15 +165,17 @@ public class GamePlay{
 	//reset the board, should have updated speed or bit
 	private void reset() {
 		//test that the methods are being called
-		System.out.println("NumBlocks: " + numBlocks);
-		System.out.println("Speed: " + speed);
+//		System.out.println("NumBlocks: " + numBlocks);
+//		System.out.println("Speed: " + speed);
 		////////////////////////////////////////////
 		score = 0;
 		md.setScore(score);
 		
 		//TODO:	Adding the bit works, but this leaves one block that doesn't update, I don't know how
-		//to remove it
-		//blocks.removeFirst();
+		//to remove it	
+		//DONE
+		
+		blocks.removeFirst();
 	}
 
 	public int getScore() {   
@@ -350,7 +352,7 @@ public class GamePlay{
 		id.setVisible(true);
 		//Loops until the play button is pressed so the game doesn't begin
 		while(!md.gameBegin()) {
-			System.out.println("Need this to run");
+			System.out.println();
 		}
 		//main will need to call update to move the block every frame like it's supposed to.
 		//System.out.println(md.gameBegin());
