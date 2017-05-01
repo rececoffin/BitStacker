@@ -91,7 +91,7 @@ public class GamePlay{
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
-		level = 9;
+		level = 1;
 		score = 0;
 
 		speed = 100;
@@ -128,7 +128,7 @@ public class GamePlay{
 		score++;
 
 		md.setScore(score);
-		if (score == 2) {
+		if (score == 8) {
 			level++;
 			md.setLevel(level);
 			md.setIsNewLevel(true);
