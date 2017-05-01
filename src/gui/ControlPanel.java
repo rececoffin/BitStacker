@@ -28,8 +28,12 @@ public class ControlPanel extends JPanel{
 
 	public static final int CONTROL_PANEL_HEIGHT = 100;
 	public static final int GAME_PANEL_HEIGHT = MainDisplay.MAIN_DISPLAY_HEIGHT - CONTROL_PANEL_HEIGHT;
-
+	//universal font for all screens
+	Font myFont = new Font("Impact", Font.PLAIN, 35);
+	Font myFont20 = new Font("Impact", Font.PLAIN, 20);
+	
 	public ControlPanel(){
+		
 		setPreferredSize(new Dimension(200, CONTROL_PANEL_HEIGHT));
 		
 		setBackground(new Color(255,3,214));
@@ -47,11 +51,18 @@ public class ControlPanel extends JPanel{
 	}
 	public void submitEvent(){
 		String answer = textBox.getText();
-		int v = Integer.parseInt(answer);
+		
+		try{
+			int v = Integer.parseInt(answer);
+			GamePlay.getInstance().submitButton(v);
+		}
+		catch (NumberFormatException e){
+			
+		}
 		textBox.setText("");
 
 		
-		GamePlay.getInstance().submitButton(v);
+		
 		
 	}
 	private JPanel createLabel(){
@@ -59,7 +70,7 @@ public class ControlPanel extends JPanel{
 		JLabel box = new JLabel("                                                                                                                                                              ");
 		p.add(box);
 		JLabel label = new JLabel("Enter Answer: ");
-		label.setFont(new Font("Impact", Font.PLAIN, 35));
+		label.setFont(myFont);
 		label.setForeground(Color.WHITE);
 		label.setAlignmentX(CENTER_ALIGNMENT);
 		label.setAlignmentY(CENTER_ALIGNMENT);
@@ -75,7 +86,7 @@ public class ControlPanel extends JPanel{
 		p.add(box);
 		textBox = new JTextField(15);
 		textBox.setPreferredSize( new Dimension( 300, 40 ) );
-		textBox.setFont(new Font("Impact", Font.PLAIN, 20));
+		textBox.setFont(myFont20);
 		textBox.addKeyListener(new EnterListener());
 	
 		p.add(textBox);
@@ -92,7 +103,7 @@ public class ControlPanel extends JPanel{
 		button.addMouseListener(new SubmitListener());
 	
 		button.setForeground(Color.WHITE);
-		button.setFont(new Font("Impact", Font.PLAIN, 35));
+		button.setFont(myFont);
 		button.setPreferredSize(new Dimension(200,80));
 		
 		p.add(button);

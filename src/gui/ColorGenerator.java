@@ -12,6 +12,7 @@ public class ColorGenerator {
 	}
 	
 	static public Color getRandomColor(){
+		//choose a random color for every block
 		int n = random.nextInt(7);
 		Color c;
 		switch (n){
