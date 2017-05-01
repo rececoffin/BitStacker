@@ -70,7 +70,7 @@ public class GamePlay{
 	//Needed to prevent thread conflicts with the linked lists
 	ReentrantLock lock = new ReentrantLock();
 
-	private int level;
+	private static int level;
 	private int score;
 	private LinkedList<BlockRow> blocks;
 	private ParticleSystemManager psm;
@@ -91,7 +91,7 @@ public class GamePlay{
 
 	public GamePlay() {
 		blocks = new LinkedList<BlockRow>();
-		level = 1;
+		level = 9;
 		score = 0;
 
 		speed = 100;
@@ -128,7 +128,7 @@ public class GamePlay{
 		score++;
 
 		md.setScore(score);
-		if (score == 8) {
+		if (score == 2) {
 			level++;
 			md.setLevel(level);
 			md.setIsNewLevel(true);
@@ -350,16 +350,15 @@ private static void endLogic(){
 		}
 		//main will need to call update to move the block every frame like it's supposed to.
 		//System.out.println(md.gameBegin());
-		while(gameStatus){
+		while(level != 11){
 
-			if (!md.isNewLevel() && gameStatus) {
+			if (!md.isNewLevel() && level != 11) {
 				GamePlay.getInstance().update();
 			}
-			else{
-				break;
-			}
+		
 
 		}
+		System.out.println(level);
 		System.out.println("HELP");
 		end = new GameOver();
 		end.setVisible(true);
