@@ -1,0 +1,59 @@
+78de57f was Cat Wylie, 3 minutes ago, message: Re-exported
+2695ce1 was Cat Wylie, 4 minutes ago, message: Added try catch to catch when there is no answer in the text box
+4d688dd was Cat Wylie, 21 minutes ago, message: Added the jar file
+a59e72f was Cat Wylie, 14 hours ago, message: CHanged back to normal level not for testing
+95e04d9 was Cat Wylie, 14 hours ago, message: Fixed code for real this time
+f55910e was izaaksulka, 20 hours ago, message: now after missing two guesses on a row, all the rows display the base 10 value of each bit to help people learn.  I also made it so that the text is actually drawn so it looks like it's in the middle of the block.
+3d5fd24 was Cat Wylie, 21 hours ago, message: Changed wording on intro screen
+1927138 was Cat Wylie, 21 hours ago, message: Fixed end screen bug.
+ff28079 was Cat Wylie, 21 hours ago, message: Looking at the bug
+833197d was rececoffin, 22 hours ago, message: Made the you win dialog come up, only works after level 9 and I have no idea why
+69d674b was rececoffin, 25 hours ago, message: Minor tweak to the reset function, commented and cleaned
+46cd858 was rececoffin, 25 hours ago, message: Remove the last block when the user decides to add one to the bit string
+9ffb2bb was Juicebox G, 2 days ago, message: Added print statment into beginning game pause, as well as got the program to not call update during a new level dialog
+95fceb8 was Cat-Wylie, 2 days ago, message: Still merging
+0c637bd was Cat-Wylie, 2 days ago, message: Merging
+3d07f14 was Cat-Wylie, 2 days ago, message: Got splash screen for end game working
+a1c136c was Benjamin Beatty, 2 days ago, message: Game doesn't start until play button is pushed and game pauses when new level diaglog is up
+7f4b0a4 was Cat-Wylie, 2 days ago, message: Made the windows centered
+742a289 was Cat-Wylie, 2 days ago, message: Made the option screen for new level apealing
+c6c1cb4 was rececoffin, 2 days ago, message: Added next level dialog to repo
+3679ea3 was rececoffin, 3 days ago, message: Added dialog for when a user beats a level, allows them to update the speed or add a bit
+ba7cb3c was Cat Wylie, 3 days ago, message: Help
+248d51e was Cat Wylie, 3 days ago, message: Merging
+b3ac919 was Cat Wylie, 3 days ago, message: Merging
+9e05a30 was rececoffin, 4 days ago, message: Updating score and level as the user plays. Began adding functionality for starting the next level
+b087f9b was Cat Wylie, 4 days ago, message: merging
+2a0b7d0 was Izaak Sulka, 4 days ago, message: finished implementing particle system for when a row is guessed correctly
+a7e00dd was Cat Wylie, 4 days ago, message: Changed speed was too difficult
+eb5559b was Izaak Sulka, 4 days ago, message: added particle system, but have yet to make it appear in the correct place and move correctly
+7c23140 was Izaak Sulka, 4 days ago, message: row translation down the screen and then row stacking is now correct, and I got the answer submissions to correctly remove the bottom row when they're correct.  Also fixed a problem where the GUI thread and the main thread could access the linked list at the same time and cause a crash by locking the threads around operations that require the LL state to remain unchanged for  while
+18567d3 was Izaak Sulka, 4 days ago, message: update being called correctly
+e5df4d4 was Izaak Sulka, 4 days ago, message: working on making the MiddlePanel update its drawing every frame
+220c273 was Cat Wylie, 4 days ago, message: Working on incorrect submison issue
+38f5bcd was rececoffin, 4 days ago, message: added comments and spacing because OCD
+fe96256 was rececoffin, 4 days ago, message: Merge branch 'master' of https://github.com/rececoffin/BitStacker
+a07624f was rececoffin, 4 days ago, message: minor changes to variable permissions
+647b8ff was Cat-Wylie, 4 days ago, message: Added implementation to press enter instead of submit
+a77f73b was Cat-Wylie, 4 days ago, message: Added sassy comment about color scheme
+c430c66 was Cat-Wylie, 4 days ago, message: Changed some style things, :)
+9a72aa5 was Cat-Wylie, 4 days ago, message: Merge branch 'master' of https://github.com/rececoffin/BitStacker
+a0edaf7 was Cat-Wylie, 4 days ago, message: Added file. Sorry!
+7a82c82 was izaaksulka, 5 days ago, message: changed 'y' to 'blockPaneHeight' because that makes more sense
+5d5b9f6 was izaaksulka, 5 days ago, message: added some functions that 'run' the game.  I haven't been able to test thorougly because I don't have all the documents but these are a start for what will make the rows appear to move down the screen and then stack up at the bottom
+8b3bb43 was Cat-Wylie, 5 days ago, message: GUIed it so that it pops up the main frame when you click the start button
+cc4ef32 was Cat-Wylie, 5 days ago, message: Added implementation to clear the text box after submit button
+2a830d8 was Cat-Wylie, 5 days ago, message: Merging
+93cc3d2 was Cat-Wylie, 5 days ago, message: Fixed a bug that was keeping the play button from working.
+13646d2 was Cat-Wylie, 5 days ago, message: Added gui from other branch (had trouble merging so gave up and copied it over
+8e5b70a was Benjamin Beatty, 6 days ago, message: Began implementing block movement and draw methods
+084d8f6 was Izaak Sulka, 6 days ago, message: merged changes
+9e4044f was Izaak Sulka, 6 days ago, message: Changed checkGuess in Block row to use caclValue and made SetValue compatible with that new method
+4911473 was Benjamin Beatty, 6 days ago, message: Modified GamePlay and got deleting block and game over tests to pass
+b4a8c48 was rececoffin, 7 days ago, message: Passing binary->int conversion tests
+2eba2e5 was rececoffin, 8 days ago, message: Passing random bit test
+ec3c285 was rececoffin, 12 days ago, message: Finished failing tests
+c02041e was rececoffin, 13 days ago, message: Merge branch 'master' of https://github.com/rececoffin/BitStacker
+ebd7de9 was rececoffin, 13 days ago, message: Added most failing tests, missing deletingBlocks tests
+82bab7e was Cat-Wylie, 13 days ago, message: Added sample screen
+c54a998 was Rece Coffin, 2 weeks ago, message: Initial commit
