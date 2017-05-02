@@ -94,8 +94,8 @@ public class GamePlay{
 		level = 1;
 		score = 0;
 		
-		//speed = 100;
-		speed = 400;
+		speed = 100;
+		//speed = 400;
 		numBlocks = 3;
 		psm = new ParticleSystemManager();
 
