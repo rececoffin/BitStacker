@@ -93,8 +93,9 @@ public class GamePlay{
 		blocks = new LinkedList<BlockRow>();
 		level = 1;
 		score = 0;
-
-		speed = 100;
+		
+		//speed = 100;
+		speed = 400;
 		numBlocks = 3;
 		psm = new ParticleSystemManager();
 
@@ -296,7 +297,7 @@ public class GamePlay{
 		}
 
 		MiddlePanel.getInstance().requestRepaint();
-
+		
 	}
 
 	//Figure out if the floating block is done moving - meaning it has reached the top of the stack
@@ -332,10 +333,6 @@ public class GamePlay{
 		blocks.addFirst(newRow);
 	}
 
-private static void endLogic(){
-	
-	
-}
 	public static void main(String[] args) {
 
 		md = MainDisplay.getFrameInstance();
@@ -354,9 +351,11 @@ private static void endLogic(){
 
 			if (!md.isNewLevel() && level != 11) {
 				GamePlay.getInstance().update();
+				if(!gameStatus){
+					break;
+				}
 			}
 		
-
 		}
 		System.out.println(level);
 		System.out.println("HELP");
